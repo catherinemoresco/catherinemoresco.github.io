@@ -1,22 +1,41 @@
-
-/*font-family: 'Dosis', sans-serif;*/
 h1{
-	color:#00FF00;
+	color:#FFFFFF;
 	font-family: 'Sail', cursive;
-	font-size:60px;
+	font-size:80px;
 	text-shadow: 1px 1px 1px #ccc;}
 
 p{
 	font-family: 'Dosis', sans-serif;
 }
-body{
-	background:url(/img/light_wool.png) repeat 0 0;
+
+
+.container-narrow{
+	background: url(img/light_wool.png) repeat 0 0;
+	background-color:#FFFFFF;
 }
 
 .jumbotron{
 	background-color:#FFD1DE;
 }
 
-p.jumbotron{
+.lead{
 	font-size: 15px;
+}
+
+.panel-one{
+	background-color:#000000;
+	padding:20px;
+	color:#FFFFFF;
+	font-size:20px;
+}
+
+h1.panel-two{
+	color:#000000;
+}
+.panel-two{
+	background-color:#FFFFFF;
+	padding:20px;
+	color:#000000;
+	text-align: right;
+	font-size:20px;
 }
