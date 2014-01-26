@@ -1,12 +1,13 @@
 
 /*font-family: 'Dosis', sans-serif;*/
-h1
-{font-family: 'Sail', cursive;
-font-size:60px;}
+h1{
+	font-family: 'Sail', cursive;
+	font-size:60px;
+	text-shadow: 1px 1px 1px #ccc;}
 
 p{
-font-family: 'Dosis', sans-serif;
+	font-family: 'Dosis', sans-serif;
 }
 body{
 	background:url(/img/light_wool.png) repeat 0 0;
-	}
+}
