@@ -1,16 +1,22 @@
 h1{
-	color:#FFFFFF;
+	/*color:#FFFFFF;*/
 	font-family: "Sail", cursive;
-	font-size:80px;
+	font-size:120px;
 	text-shadow: 1px 1px 1px #ccc;}
 
 p{
 	font-family: "Dosis", sans-serif;
 }
 
+.alert{
+	background-color:#FFFFFF;
+}
+body{
+	background:url(../img/bokehbackground.jpg) repeat 0 0;
+	background-size: 100%;
+}
 
 .container-narrow{
-	background:url("/img/light_wool.png") repeat 0 0;
 	background-color:#FFFFFF;
 }
 
@@ -23,20 +29,19 @@ p{
 }
 
 .panel-one{
-	background:url("/img/binding-dark.png");
-	padding:20px;
+	background:url(../img/binding_dark.png);
+	padding:30px;
 	color:#FFFFFF;
-	font-size:20px;
+	font-size:30px;
 }
 
 h1.panel-two{
 	color:#000000;
 }
 .panel-two{
-	background:url("/img/binding-dark.png") repeat 0 0;
-	/*background-color:#FFEBF0;*/
-	padding:20px;
+	background-color:#FFEBF0;
+	padding:30px;
 	color:#000000;
 	text-align: right;
-	font-size:20px;
+	font-size:30px;
 }
