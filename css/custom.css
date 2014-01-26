@@ -10,7 +10,7 @@ p{
 
 
 .container-narrow{
-	background:url("./img/light_wool.png") repeat 0 0;
+	background:url("/img/light_wool.png") repeat 0 0;
 	background-color:#FFFFFF;
 }
 
@@ -23,7 +23,7 @@ p{
 }
 
 .panel-one{
-	background:url("img/binding-dark.png");
+	background:url("/img/binding-dark.png");
 	padding:20px;
 	color:#FFFFFF;
 	font-size:20px;
@@ -33,7 +33,7 @@ h1.panel-two{
 	color:#000000;
 }
 .panel-two{
-	background:url("./img/binding-dark.png") repeat 0 0;
+	background:url("/img/binding-dark.png") repeat 0 0;
 	/*background-color:#FFEBF0;*/
 	padding:20px;
 	color:#000000;
