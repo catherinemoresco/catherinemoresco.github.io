@@ -11,3 +11,7 @@ p{
 body{
 	background:url(/img/light_wool.png) repeat 0 0;
 }
+
+.jumbotron{
+	background-color:#F0d5DD;
+}
