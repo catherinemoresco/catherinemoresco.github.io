@@ -15,7 +15,7 @@ p{
 body{
 	background:url(../img/bokehbackground.jpg);
 	background-size: cover;
-	background-attachment: center;
+	background-attachment: fixed;
 	background-position: center;
 }
 
