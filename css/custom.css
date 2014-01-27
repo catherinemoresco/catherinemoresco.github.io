@@ -2,7 +2,7 @@ h1{
 	/*color:#FFFFFF;*/
 	font-family: "Sail", cursive;
 	font-size:90px;
-	text-shadow: 1px 1px 1px #ccc;}
+	text-shadow: 2px 2px 2px #ccc;}
 
 p{
 	font-family: "Dosis", sans-serif;
@@ -32,25 +32,26 @@ body{
 }
 
 .panel-two{
-	background:url(../img/binding_dark.png) repeat 0 0;
+	background:url(../img/groovepaper.png) repeat 0 0;
 	padding:30px;
-	color:#FFFFFF;
+	color:#000000;
 	font-size:30px;
 	max-width: 700px;
 	margin:0 auto;
+	background-color:#FFFFFF;
 }
 
 
 .panel-one{
-	/*background-color:#FFEBF0;*/
-	background:url(../img/binding_dark.png) repeat 0 0;
+	background:url(../img/groovepaper.png) repeat 0 0;
 	padding:30px;
-	color:#FFFFFF;
+	color:#000000;
 	text-align: right;
 	font-size:30px;
 	max-width: 700px;
 	position:center;
 	margin:0 auto;
+	background-color:#FFFFFF;
 }
 
     
