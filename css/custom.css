@@ -2,7 +2,7 @@ h1{
 	/*color:#FFFFFF;*/
 	font-family: "Sail", cursive;
 	font-size:90px;
-	text-shadow: 2px 2px 2px #ccc;}
+	text-shadow: 2px 2px 2px #636363;}
 
 p{
 	font-family: "Dosis", sans-serif;
@@ -19,9 +19,6 @@ body{
 	background-position: center;
 }
 
-.container-narrow{
-	background-color:#FFFFFF;
-}
 
 .jumbotron{
 	background-color:#FFD1DE;
@@ -29,6 +26,7 @@ body{
 
 .lead{
 	font-size: 15px;
+	color:#000000;
 }
 
 .panel-two{
@@ -53,5 +51,8 @@ body{
 	margin:0 auto;
 	background-color:#FFFFFF;
 }
+
+
+
 
     
