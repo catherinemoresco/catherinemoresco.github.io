@@ -13,7 +13,7 @@ p{
 	background-color:#FFFFFF;
 }
 body{
-	/*background:url(../img/Optimized-bokehbackground.jpg);*/
+	background:url(../img/Optimized-bokehbackground.jpg);
 	background-color:#000000;
 	background-size: cover;
 	background-attachment: fixed;
