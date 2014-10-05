@@ -1,0 +1,82 @@
+/* homepage-specific styles */
+
+.landing-page{
+	text-align:center;
+	font-family: Raleway;
+
+	h1{
+		color:#000080;
+		text-align:center;
+		font-family:$header-font-family;
+		font-size: 55px;
+		margin:0;
+	}
+
+}
+
+/* background image */
+
+.homepage-background{
+	background: $background-tile;
+	z-index: -1;
+	position:relative;
+	position: absolute;
+
+	height:100vh;
+	width:100vw;
+}
+
+/* centering content */
+
+
+@mixin calc($property, $expression) { 
+  #{$property}: -webkit-calc(#{$expression}); 
+  #{$property}: calc(#{$expression}); 
+} 
+
+.outer-div-for-centering{
+	display:table;
+	postion:absolute;
+	height: 80vh;
+	width: 100%;
+ 	@include calc(height, "100vh - 150px");
+}
+
+.middle-div-for-centering{
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.inner-div-for-centering{
+	margin-left:auto;
+	margin-right:auto;
+	width: 100%;
+}
+
+
+/* links */
+.homepage-link{
+	display:inline-block;
+
+	.page-link{
+		margin-left: 5px;
+		margin-right:5px;
+		font-size:12px;
+		background:#e5e5e5;
+		border-radius:50px;
+		padding:5px 15px 5px 15px;
+		color:#000080;
+	}
+
+	.page-link:hover{
+		text-decoration: none;
+		color:#000080;
+		background:#ddd;
+	}
+}
+
+/* footer */
+
+.home-footer-container > .site-footer{
+	background:white;
+}

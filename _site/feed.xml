@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Catherine Moresco</title>
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</description>
+    <link>http://catmores.co/</link>
+    <atom:link href="http://catmores.co/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sun, 05 Oct 2014 13:00:39 -0500</pubDate>
+    <lastBuildDate>Sun, 05 Oct 2014 13:00:39 -0500</lastBuildDate>
+    <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>On improving.</title>
+        <description>&lt;p&gt;&lt;em&gt;Perfectionism.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I’ve always been “good at school”. This isn’t an indicator of genius, but rather one of being quite suited to a system that is very rewarding (and perhaps demanding) of being a perfectionist.&lt;/p&gt;
+
+&lt;p&gt;That’s good and bad. On the one hand, I’m very self-motivated! On the other, when it comes to process that are inherently incremental and reliant upon continuously learning–like, you know, &lt;em&gt;practically everything in the real world&lt;/em&gt;–I sometimes get uncomfortable.&lt;/p&gt;
+
+&lt;p&gt;Schoolwork is extremely modular. You work on a project, you submit it, you get a grade, you move on. You take a test, you submit it, you get a grade, you move on. So, when you walk into that test or sit down to work on that project, there’s an immense amount of pressure to do it right the first time, make it as complete and thorough and perfect as you can, and submit it only when you’re ready.&lt;/p&gt;
+
+&lt;p&gt;Real life isn’t so climactic. For example, this website.&lt;/p&gt;
+
+&lt;p&gt;I spent a lot of my summer builing and rebuilding my website–trying to perfect it, trying to figure out which fonts truly &lt;em&gt;embody&lt;/em&gt; my &lt;em&gt;soul&lt;/em&gt; (Raleway won out, but Open Sans will forever be dear to me) and painstakingly adjusting a color scheme, only to then decide that what I had constructed wasn’t perfect, after all.&lt;/p&gt;
+
+&lt;p&gt;And then I realized that I was getting absolutely nowhere. This isn’t a marriage proposal or a down payment on a house, it’s a website. It can change. It can be imperfect, and the journey starting from its imperfections can (and hopefully will) be a valuable one. This scripty font? &lt;em&gt;Why not?&lt;/em&gt; Navy blue? &lt;em&gt;Sure&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;(Also, I started applying for jobs, and my old website was pretty mediocre, so, you know. Pressure.)&lt;/p&gt;
+
+&lt;p&gt;So here it is: my blog. It’s imperfect, and it’s under construction…and I hope it will be that way for a long time.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 05 Oct 2014 06:37:00 -0500</pubDate>
+        <link>http://catmores.co/2014/10/05/on-improving.html</link>
+        <guid isPermaLink="true">http://catmores.co/2014/10/05/on-improving.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Hello, world.</title>
+        <description>&lt;p&gt;Here we are. I have a blog. I am blogging. Hooray!&lt;/p&gt;
+</description>
+        <pubDate>Tue, 30 Sep 2014 16:50:22 -0500</pubDate>
+        <link>http://catmores.co/jekyll/update/2014/09/30/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://catmores.co/jekyll/update/2014/09/30/welcome-to-jekyll.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+  </channel>
+</rss>
