@@ -78,5 +78,9 @@
 /* footer */
 
 .home-footer-container > .site-footer{
-	background:white;
+	background:$navy;
+
+	svg{
+		fill:#fff;
+	}
 }

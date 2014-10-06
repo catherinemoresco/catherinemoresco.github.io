@@ -529,4 +529,6 @@ pre {
 
 /* footer */
 .home-footer-container > .site-footer {
-  background: white; }
+  background: #000080; }
+  .home-footer-container > .site-footer svg {
+    fill: #fff; }
