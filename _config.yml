@@ -11,4 +11,4 @@ twitter_username: catmoresco
 github_username:  catherinemoresco
 
 # Build settings
-markdown: kramdown
+markdown: redcarpet
