@@ -6,29 +6,102 @@
 </description>
     <link>http://catmores.co/</link>
     <atom:link href="http://catmores.co/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 05 Oct 2014 22:29:03 -0500</pubDate>
-    <lastBuildDate>Sun, 05 Oct 2014 22:29:03 -0500</lastBuildDate>
+    <pubDate>Fri, 14 Nov 2014 00:40:52 -0600</pubDate>
+    <lastBuildDate>Fri, 14 Nov 2014 00:40:52 -0600</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Teaching my Computer to Read, Part 1: PDFs are Evil</title>
+        <description>&lt;p&gt;My favorite computer science classes are the ones that let you build whatever you want. My Introduction to Programming class consisted of a class wiki with student-posted problems, that you could complete whenever you wanted, however you wanted, in whatever language you wanted. It was awesome. &lt;/p&gt;
+
+&lt;p&gt;My class this quarter, Software Construction, has a similar setup, though slightly more structured; working in teams of six, we get to present a proposal, complete with UML use case, class, and activity diagrams, and then implement it and test it rigorously.&lt;/p&gt;
+
+&lt;p&gt;I enjoy messing around with computer vision (that is, after all, why I &lt;a href=&quot;http://catherinemoresco.github.io/projects/&quot;&gt;taught my fish to play Pokemon that one time&lt;/a&gt;), so I decided to do a project that would involve some sweet OpenCV action.
+ I also had a lot of readings to do for my philosophy class. Most of these were PDFs of poorly scanned documents. Even when the text lines were miraculously not affected by page curvature, they were often skewed. This is fine for reading, but since they&amp;#39;re just scans they can&amp;#39;t be highlighted in Preview for Mac, so I always have to resort to awkwardly drawing straight boxes around my skewed areas of interest, or spending minutes drawing individual lines under whole paragraphs and minutes more making them consistent in length and width.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+&lt;img src=&quot;/img/2014-11-13/Nonideal_page.png&quot;&gt;
+&lt;img src=&quot;/img/2014-11-13/Nonideal_boxed.png&quot;&gt;
+&lt;img src=&quot;/img/2014-11-13/Nonideal_underlined.png&quot;&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;How hard could it be,&lt;/em&gt; I thought, &lt;em&gt;to detect the lines and draw the highlights on myself?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;And, in the meantime, split pages in which there are two book-pages per PDF-page? And maybe rotate the pages ever-so-slightly so that they&amp;#39;re straight again? &lt;/p&gt;
+
+&lt;p&gt;And so my project was born.&lt;/p&gt;
+
+&lt;p&gt;It wasn&amp;#39;t about teaching my computer to read, so much as to teach it the small accessory functions to reading, like straightening a page or laying it flat, without having to go through the trouble of OCR-ing the whole damn thing.&lt;/p&gt;
+
+&lt;p&gt;My first issue, through, was that image processing techniques are (tautologically) meant to process images, and PDFs are not images. In the moment of optimisim upon my conception of the project, this struck me as a trivial problem. After all, scans are just images, right? It can&amp;#39;t be that hard to extract them from their barely-there PDF shell.&lt;/p&gt;
+
+&lt;p&gt;Except it can. Taking apart PDFs is hard. Extracting JPGs from PDFs &lt;em&gt;can&lt;/em&gt; be easy (for example, take a look at &lt;a href=&quot;http://nedbatchelder.com/blog/200712/extracting_jpgs_from_pdfs.html&quot;&gt;Ned Batchelder&amp;#39;s code snippet&lt;/a&gt; that accomplishes this in 20-ish lines of Python), but it can also be hard. As I discovered when I tried to run that same snippet on a few different documents and, to my horror, discovered that there are some images it just doesn&amp;#39;t pick up on. It was then, and only then, (after I had gotten my project proposal approved and convinced some poor souls to hop on board with me) that I stumbled upon this &lt;a href=&quot;https://blog.idrsolutions.com/2010/04/understanding-the-pdf-file-format-how-are-images-stored/&quot;&gt;lovely soul-crushing article&lt;/a&gt;, that kindly broke the news that &amp;quot;if you want to extract images from a PDF, you need to assemble the image from all the raw data – it is not stored as a complete image file you can just rip out.&amp;quot;&lt;/p&gt;
+
+&lt;p&gt;Oops.&lt;/p&gt;
+
+&lt;p&gt;Luckily, there are PDF rendering libraries out there. I spent about eight hours researching them and then four trying to get the one that I decided on, &lt;a href=&quot;http://www.imagemagick.org/&quot;&gt;ImageMagick&lt;/a&gt;, installed properly. That adds up to about twelve hours of seriously considering renaming our endeavor from &amp;quot;The PDF Project&amp;quot; to &amp;quot;Who Needs PDFs Anyway&amp;quot;, and pivoting to work exclusively with tried and true image formats: JPG, PNG. Old friends.&lt;/p&gt;
+
+&lt;p&gt;So...ta-dah.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;extractImages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pdf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;pdf_im&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PyPDF2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PdfFileReader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pdf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;npage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pdf_im&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getNumPages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;npage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PythonMagick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;blob&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PythonMagick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Blob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;density&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;75&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;c&quot;&gt;## read in pdf&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pdf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;[&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;]&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+
+            &lt;span class=&quot;c&quot;&gt;## write to buffer&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;blob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;RGB&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;rawdata&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;base64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b64decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;blob&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;base64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+            &lt;span class=&quot;c&quot;&gt;## convert raw data to np array&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ndarray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;uint16&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rawdata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It&amp;#39;s slow, and a little ugly, and brings another third-party dependency into our cobbled-together little app, but it works.&lt;/p&gt;
+
+&lt;p&gt;And that&amp;#39;s my punsishment for not doing my research and fully expecting to be able to build a PDF renderer in a week.&lt;/p&gt;
+
+&lt;p&gt;Lesson learned.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Next Time: Skew detection!&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Nov 2014 23:11:00 -0600</pubDate>
+        <link>http://catmores.co/cv/pdf/2014/11/12/teaching-my-computer-to-read-pdfs-are-evil.html</link>
+        <guid isPermaLink="true">http://catmores.co/cv/pdf/2014/11/12/teaching-my-computer-to-read-pdfs-are-evil.html</guid>
+        
+        
+        <category>cv</category>
+        
+        <category>pdf</category>
+        
+      </item>
     
       <item>
         <title>On improving.</title>
         <description>&lt;p&gt;&lt;em&gt;Perfectionism.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;I’ve always been “good at school”. This isn’t an indicator of genius, but rather one of being quite suited to a system that is very rewarding (and perhaps demanding) of being a perfectionist.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;ve always been &amp;quot;good at school&amp;quot;. This isn&amp;#39;t an indicator of genius, but rather one of being quite suited to a system that is very rewarding (and perhaps demanding) of being a perfectionist.&lt;/p&gt;
 
-&lt;p&gt;That’s good and bad. On the one hand, I’m very self-motivated! On the other, when it comes to process that are inherently incremental and reliant upon continuously learning–like, you know, &lt;em&gt;practically everything in the real world&lt;/em&gt;–I sometimes get uncomfortable.&lt;/p&gt;
+&lt;p&gt;That&amp;#39;s good and bad. On the one hand, I&amp;#39;m very self-motivated! On the other, when it comes to process that are inherently incremental and reliant upon continuously learning--like, you know, &lt;em&gt;practically everything in the real world&lt;/em&gt;--I sometimes get uncomfortable.&lt;/p&gt;
 
-&lt;p&gt;Schoolwork is extremely modular. You work on a project, you submit it, you get a grade, you move on. You take a test, you submit it, you get a grade, you move on. So, when you walk into that test or sit down to work on that project, there’s an immense amount of pressure to do it right the first time, make it as complete and thorough and perfect as you can, and submit it only when you’re ready.&lt;/p&gt;
+&lt;p&gt;Schoolwork is extremely modular. You work on a project, you submit it, you get a grade, you move on. You take a test, you submit it, you get a grade, you move on. So, when you walk into that test or sit down to work on that project, there&amp;#39;s an immense amount of pressure to do it right the first time, make it as complete and thorough and perfect as you can, and submit it only when you&amp;#39;re ready.&lt;/p&gt;
 
-&lt;p&gt;Real life isn’t so climactic. For example, this website.&lt;/p&gt;
+&lt;p&gt;Real life isn&amp;#39;t so climactic. For example, this website.&lt;/p&gt;
 
-&lt;p&gt;I spent a lot of my summer builing and rebuilding my website–trying to perfect it, trying to figure out which fonts truly &lt;em&gt;embody&lt;/em&gt; my &lt;em&gt;soul&lt;/em&gt; (Raleway won out, but Open Sans will forever be dear to me) and painstakingly adjusting a color scheme, only to then decide that what I had constructed wasn’t perfect, after all.&lt;/p&gt;
+&lt;p&gt;I spent a lot of my summer builing and rebuilding my website--trying to perfect it, trying to figure out which fonts truly &lt;em&gt;embody&lt;/em&gt; my &lt;em&gt;soul&lt;/em&gt; (Raleway won out, but Open Sans will forever be dear to me) and painstakingly adjusting a color scheme, only to then decide that what I had constructed wasn&amp;#39;t perfect, after all.&lt;/p&gt;
 
-&lt;p&gt;And then I realized that I was getting absolutely nowhere. This isn’t a marriage proposal or a down payment on a house, it’s a website. It can change. It can be imperfect, and the journey starting from its imperfections can (and hopefully will) be a valuable one. This scripty font? &lt;em&gt;Why not?&lt;/em&gt; Navy blue? &lt;em&gt;Sure&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;And then I realized that I was getting absolutely nowhere. This isn&amp;#39;t a marriage proposal or a down payment on a house, it&amp;#39;s a website. It can change. It can be imperfect, and the journey starting from its imperfections can (and hopefully will) be a valuable one. This scripty font? &lt;em&gt;Why not?&lt;/em&gt; Navy blue? &lt;em&gt;Sure&lt;/em&gt;.&lt;/p&gt;
 
 &lt;p&gt;(Also, I started applying for jobs, and my old website was pretty mediocre, so, you know. Pressure.)&lt;/p&gt;
 
-&lt;p&gt;So here it is: my blog. It’s imperfect, and it’s under construction…and I hope it will be that way for a long time.&lt;/p&gt;
+&lt;p&gt;So here it is: my blog. It&amp;#39;s imperfect, and it&amp;#39;s under construction...and I hope it will be that way for a long time.&lt;/p&gt;
 </description>
         <pubDate>Sun, 05 Oct 2014 06:37:00 -0500</pubDate>
         <link>http://catmores.co/2014/10/05/on-improving.html</link>

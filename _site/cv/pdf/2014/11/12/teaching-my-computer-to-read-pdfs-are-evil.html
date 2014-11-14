@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Projects</title>
+    <title>Teaching my Computer to Read, Part 1: PDFs are Evil</title>
     <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 ">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://catmores.co/projects/">
+    <link rel="canonical" href="http://catmores.co/cv/pdf/2014/11/12/teaching-my-computer-to-read-pdfs-are-evil.html">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300|Rochester|Great+Vibes|Raleway' rel='stylesheet' type='text/css'>
 </head>
 
@@ -65,36 +65,77 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <script type="text/javascript"
+        <div class="post">
+
+<script type="text/javascript"
     src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-<div class="post">
-
   <header class="post-header">
-    <h1 class="post-title">Projects</h1>
+    <h1 class="post-title">Teaching my Computer to Read, Part 1: PDFs are Evil</h1>
+    <p class="post-meta">Nov 12, 2014</p>
   </header>
 
   <article class="post-content">
-    <p><br></p>
+    <p>My favorite computer science classes are the ones that let you build whatever you want. My Introduction to Programming class consisted of a class wiki with student-posted problems, that you could complete whenever you wanted, however you wanted, in whatever language you wanted. It was awesome. </p>
 
-<h1>Fish Plays Pokemon</h1>
+<p>My class this quarter, Software Construction, has a similar setup, though slightly more structured; working in teams of six, we get to present a proposal, complete with UML use case, class, and activity diagrams, and then implement it and test it rigorously.</p>
 
-<p><img src="/img/fpp1.jpg" style="height: 300px;margin-left:auto;margin-right:auto;display:block"/></p>
+<p>I enjoy messing around with computer vision (that is, after all, why I <a href="http://catherinemoresco.github.io/projects/">taught my fish to play Pokemon that one time</a>), so I decided to do a project that would involve some sweet OpenCV action.
+ I also had a lot of readings to do for my philosophy class. Most of these were PDFs of poorly scanned documents. Even when the text lines were miraculously not affected by page curvature, they were often skewed. This is fine for reading, but since they&#39;re just scans they can&#39;t be highlighted in Preview for Mac, so I always have to resort to awkwardly drawing straight boxes around my skewed areas of interest, or spending minutes drawing individual lines under whole paragraphs and minutes more making them consistent in length and width.</p>
 
-<p>A collaboration with <a href="http://pfacheris.github.io/">Patrick Facheris</a> in which we &quot;taught&quot; our pet fish to play Pokemon by writing a motion tracker in Python and OpenCV to trace his movements around his tank. The project was featured on <a href="http://www.forbes.com/sites/davidthier/2014/08/08/20000-people-are-watching-a-fish-play-pokemon/">Forbes</a>, <a href="http://www.bbc.com/news/technology-28704028">BBC</a>, and <a href="http://techcrunch.com/2014/08/07/watch-this-actual-real-life-fish-play-pokemon-albeit-poorly/">TechCrunch</a>, and I was interviewed by <a href="http://motherboard.vice.com/read/an-exclusive-interview-with-the-fish-playing-pokemon">Vice</a> and <a href="http://readwrite.com/2014/08/13/twitch-fish-play-pokemon-twitch-python-programmers">ReadWrite</a>. 
-<br>
-<br>
-We also built <a href="http://api.fishplayspokemon.com">an API</a>!</p>
+<p align="center">
+<img src="/img/2014-11-13/Nonideal_page.png">
+<img src="/img/2014-11-13/Nonideal_boxed.png">
+<img src="/img/2014-11-13/Nonideal_underlined.png">
+</p>
 
-<p><br>
-<br></p>
+<p><em>How hard could it be,</em> I thought, <em>to detect the lines and draw the highlights on myself?</em></p>
 
-<h1>Feedme at UChicago</h1>
+<p>And, in the meantime, split pages in which there are two book-pages per PDF-page? And maybe rotate the pages ever-so-slightly so that they&#39;re straight again? </p>
 
-<p><img src="/img/screenshot.png" style="height: 300px;margin-left:auto;margin-right:auto;display:block"></p>
+<p>And so my project was born.</p>
 
-<p>A web scraper and application to help students with food allergies interact with my University dining hall&#39;s nutrition information. Made with Python and flask.</p>
+<p>It wasn&#39;t about teaching my computer to read, so much as to teach it the small accessory functions to reading, like straightening a page or laying it flat, without having to go through the trouble of OCR-ing the whole damn thing.</p>
+
+<p>My first issue, through, was that image processing techniques are (tautologically) meant to process images, and PDFs are not images. In the moment of optimisim upon my conception of the project, this struck me as a trivial problem. After all, scans are just images, right? It can&#39;t be that hard to extract them from their barely-there PDF shell.</p>
+
+<p>Except it can. Taking apart PDFs is hard. Extracting JPGs from PDFs <em>can</em> be easy (for example, take a look at <a href="http://nedbatchelder.com/blog/200712/extracting_jpgs_from_pdfs.html">Ned Batchelder&#39;s code snippet</a> that accomplishes this in 20-ish lines of Python), but it can also be hard. As I discovered when I tried to run that same snippet on a few different documents and, to my horror, discovered that there are some images it just doesn&#39;t pick up on. It was then, and only then, (after I had gotten my project proposal approved and convinced some poor souls to hop on board with me) that I stumbled upon this <a href="https://blog.idrsolutions.com/2010/04/understanding-the-pdf-file-format-how-are-images-stored/">lovely soul-crushing article</a>, that kindly broke the news that &quot;if you want to extract images from a PDF, you need to assemble the image from all the raw data – it is not stored as a complete image file you can just rip out.&quot;</p>
+
+<p>Oops.</p>
+
+<p>Luckily, there are PDF rendering libraries out there. I spent about eight hours researching them and then four trying to get the one that I decided on, <a href="http://www.imagemagick.org/">ImageMagick</a>, installed properly. That adds up to about twelve hours of seriously considering renaming our endeavor from &quot;The PDF Project&quot; to &quot;Who Needs PDFs Anyway&quot;, and pivoting to work exclusively with tried and true image formats: JPG, PNG. Old friends.</p>
+
+<p>So...ta-dah.</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">extractImages</span><span class="p">(</span><span class="n">pdf</span><span class="p">):</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">pdf_im</span> <span class="o">=</span> <span class="n">PyPDF2</span><span class="o">.</span><span class="n">PdfFileReader</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span>
+        <span class="n">npage</span> <span class="o">=</span> <span class="n">pdf_im</span><span class="o">.</span><span class="n">getNumPages</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">npage</span><span class="p">):</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">PythonMagick</span><span class="o">.</span><span class="n">Image</span><span class="p">()</span>
+            <span class="n">blob</span> <span class="o">=</span> <span class="n">PythonMagick</span><span class="o">.</span><span class="n">Blob</span><span class="p">()</span>
+            <span class="n">img</span><span class="o">.</span><span class="n">density</span><span class="p">(</span><span class="s">&quot;75&quot;</span><span class="p">)</span>
+            <span class="c">## read in pdf</span>
+            <span class="n">img</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">pdf</span><span class="o">+</span><span class="s">&quot;[&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;]&quot;</span><span class="p">)</span> 
+
+            <span class="c">## write to buffer</span>
+            <span class="n">img</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">blob</span><span class="p">,</span> <span class="s">&#39;RGB&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="n">rawdata</span> <span class="o">=</span>  <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">blob</span><span class="o">.</span><span class="n">base64</span><span class="p">())</span>
+
+            <span class="c">## convert raw data to np array</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">((</span><span class="n">img</span><span class="o">.</span><span class="n">rows</span><span class="p">(),</span> <span class="n">img</span><span class="o">.</span><span class="n">columns</span><span class="p">(),</span> <span class="mi">3</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="s">&#39;uint16&#39;</span><span class="p">,</span> <span class="nb">buffer</span><span class="o">=</span><span class="n">rawdata</span><span class="p">)</span>
+            <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">images</span>
+</code></pre></div>
+<p>It&#39;s slow, and a little ugly, and brings another third-party dependency into our cobbled-together little app, but it works.</p>
+
+<p>And that&#39;s my punsishment for not doing my research and fully expecting to be able to build a PDF renderer in a week.</p>
+
+<p>Lesson learned.</p>
+
+<p><em>Next Time: Skew detection!</em></p>
 
   </article>
 
