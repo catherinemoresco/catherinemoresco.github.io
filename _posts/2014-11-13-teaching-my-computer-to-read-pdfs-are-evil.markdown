@@ -63,7 +63,7 @@ So...ta-dah.
 
 It's simple, and slow, and a little ugly, and it brings another third-party dependency into our cobbled-together little app, but it works.
 
-And that's my punsishment for not doing my research and fully expecting to be able to build a PDF renderer in a week.
+And that's my punishment for not doing my research and fully expecting to be able to build a PDF renderer in a week.
 
 Lesson learned.
 
