@@ -259,7 +259,7 @@ pre {
     width: calc(100% - (30px / 2)); } }
 .footer-icon {
   display: inline-block;
-  width: 100px;
+  width: 24%;
   margin: 0; }
 
 .icons {
@@ -533,3 +533,7 @@ pre {
   background: #000080; }
   .home-footer-container > .site-footer svg {
     fill: #fff; }
+  .home-footer-container > .site-footer .footer-icon {
+    display: inline-block;
+    width: 100px;
+    margin: 0; }

@@ -6,8 +6,8 @@
 </description>
     <link>http://catmores.co/</link>
     <atom:link href="http://catmores.co/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 14 Nov 2014 00:40:52 -0600</pubDate>
-    <lastBuildDate>Fri, 14 Nov 2014 00:40:52 -0600</lastBuildDate>
+    <pubDate>Fri, 14 Nov 2014 02:09:05 -0600</pubDate>
+    <lastBuildDate>Fri, 14 Nov 2014 02:09:05 -0600</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -64,9 +64,9 @@
             &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;It&amp;#39;s slow, and a little ugly, and brings another third-party dependency into our cobbled-together little app, but it works.&lt;/p&gt;
+&lt;p&gt;It&amp;#39;s simple, and slow, and a little ugly, and it brings another third-party dependency into our cobbled-together little app, but it works.&lt;/p&gt;
 
-&lt;p&gt;And that&amp;#39;s my punsishment for not doing my research and fully expecting to be able to build a PDF renderer in a week.&lt;/p&gt;
+&lt;p&gt;And that&amp;#39;s my punishment for not doing my research and fully expecting to be able to build a PDF renderer in a week.&lt;/p&gt;
 
 &lt;p&gt;Lesson learned.&lt;/p&gt;
 
