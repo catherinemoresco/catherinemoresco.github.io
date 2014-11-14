@@ -61,7 +61,7 @@ So...ta-dah.
 	    return images
 ```
 
-It's slow, and a little ugly, and brings another third-party dependency into our cobbled-together little app, but it works.
+It's simple, and slow, and a little ugly, and it brings another third-party dependency into our cobbled-together little app, but it works.
 
 And that's my punsishment for not doing my research and fully expecting to be able to build a PDF renderer in a week.
 
