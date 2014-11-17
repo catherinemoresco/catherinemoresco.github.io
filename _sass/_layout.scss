@@ -20,12 +20,12 @@
     letter-spacing: -1px;
     margin-bottom: 0;
     float: left;
-    font-family:$decorative-font-family;
+    font-family:$header-font-family;
 
 
     &,
     &:visited {
-        color: $navy;
+        color: $accent;
     }
 }
 
@@ -38,7 +38,7 @@
     }
 
     .page-link {
-        color: $navy;
+        color: $accent;
         line-height: $base-line-height;
 
         // Gaps between nav items, but not on the first one
@@ -97,6 +97,10 @@
 /**
  * Site footer
  */
+
+svg{
+    fill:$accent;
+}
 .site-footer {
     padding: $spacing-unit 0;
 }
@@ -203,6 +207,10 @@
 .post-link {
     display: block;
     font-size: 24px;
+}
+
+a.post-link{
+    color: black;
 }
 
 @mixin calc($property, $expression) { 

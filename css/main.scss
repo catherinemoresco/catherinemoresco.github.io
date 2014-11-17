@@ -22,15 +22,16 @@ $grey-color-light: lighten($grey-color, 40%);
 $grey-color-medium:  lighten($grey-color, 25%);
 $grey-color-dark:  darken($grey-color, 25%);
 
-$navy: #000080;
+$accent: #E74C3C;
 
 $on-palm:          600px;
 $on-laptop:        800px;
 
-$decorative-font-family: 'Great Vibes', serif;
+$decorative-font-family: 'Rochester', serif;
 $header-font-family: 'Raleway', sans-serif;
 
 $background-tile: url('/img/fancy_deboss.png');
+$background-image: url('/img/Optimized-bridge.jpeg');
 
 // Using media queries with like this:
 // @include media-query($palm) {

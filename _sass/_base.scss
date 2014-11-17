@@ -14,6 +14,8 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
+    height: 100vh;
+
     font-family: $base-font-family;
     font-size: $base-font-size;
     line-height: $base-line-height;
@@ -91,16 +93,16 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-    color: $navy;
+    color: $accent;
     text-decoration: none;
 
     &:visited {
-        color: $navy;
+        color: $accent;
     }
 
     &:hover {
-        color: $navy;
-        text-decoration: underline;
+        color: $accent;
+        font-style: italic;
     }
 }
 

@@ -5,11 +5,13 @@
 	font-family: Raleway;
 
 	h1{
-		color:#000080;
+		color:$accent;
 		text-align:center;
 		font-family:$decorative-font-family;
 		font-size: 55px;
+		text-shadow:0px 0px 5px #000;
 		margin:0;
+
 	}
 
 }
@@ -17,14 +19,34 @@
 /* background image */
 
 .homepage-background{
-	background: $background-tile;
+	background: $background-image;
 	z-index: -1;
-	position:relative;
 	position: absolute;
 
-	height:100vh;
-	width:100vw;
+	width: 100vw;
+	height: 100vh;
+	background-size:cover;
+	background-position: center;
 }
+
+.background-shading{
+	z-index: -1;
+	position: absolute;
+
+	width: 100vw;
+	height: 100vh;
+
+  /* For Safari 5.1 to 6.0 */
+  background: -webkit-linear-gradient(left,rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,.75), rgba(0,0,0,0), rgba(0,0,0,0));
+  /* For Opera 11.1 to 12.0 */
+  background: -o-linear-gradient(left,rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,.75), rgba(0,0,0,0), rgba(0,0,0,0));
+  /* For Fx 3.6 to 15 */
+  background: -moz-linear-gradient(left,rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,.75), rgba(0,0,0,0), rgba(0,0,0,0));
+  /* Standard syntax */
+  background: linear-gradient(to right, left,left,rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,.75), rgba(0,0,0,0), rgba(0,0,0,0)); 
+
+}
+
 
 /* centering content */
 
@@ -39,7 +61,7 @@
 	postion:absolute;
 	height: 80vh;
 	width: 100%;
- 	@include calc(height, "100vh - 150px");
+ 	@include calc(height, "100vh - 140px");
 }
 
 .middle-div-for-centering{
@@ -65,20 +87,21 @@
 		background:#e5e5e5;
 		border-radius:50px;
 		padding:5px 15px 5px 15px;
-		color:#000080;
+		color:$accent;
 	}
 
 	.page-link:hover{
 		text-decoration: none;
-		color:#000080;
+		color:$accent;
 		background:#ddd;
+		font-style:italic;
 	}
 }
 
 /* footer */
 
 .home-footer-container > .site-footer{
-	background:$navy;
+	background:$accent;
 
 	svg{
 		fill:#fff;

@@ -11,6 +11,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
+  height: 100vh;
   font-family: Open Sans, sans-serif;
   font-size: 16px;
   line-height: 1.5;
@@ -65,13 +66,13 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-  color: #000080;
+  color: #E74C3C;
   text-decoration: none; }
   a:visited {
-    color: #000080; }
+    color: #E74C3C; }
   a:hover {
-    color: #000080;
-    text-decoration: underline; }
+    color: #E74C3C;
+    font-style: italic; }
 
 /**
  * Blockquotes
@@ -160,9 +161,9 @@ pre {
   letter-spacing: -1px;
   margin-bottom: 0;
   float: left;
-  font-family: "Great Vibes", serif; }
+  font-family: "Raleway", sans-serif; }
   .site-title, .site-title:visited {
-    color: #000080; }
+    color: #E74C3C; }
 
 .site-nav {
   float: right;
@@ -170,7 +171,7 @@ pre {
   .site-nav .menu-icon {
     display: none; }
   .site-nav .page-link {
-    color: #000080;
+    color: #E74C3C;
     line-height: 1.5; }
     .site-nav .page-link:not(:first-child) {
       margin-left: 20px; }
@@ -209,6 +210,9 @@ pre {
 /**
  * Site footer
  */
+svg {
+  fill: #E74C3C; }
+
 .site-footer {
   padding: 30px 0; }
 
@@ -290,6 +294,9 @@ pre {
 .post-link {
   display: block;
   font-size: 24px; }
+
+a.post-link {
+  color: black; }
 
 .white-content-background {
   background: white;
@@ -479,20 +486,36 @@ pre {
   text-align: center;
   font-family: Raleway; }
   .landing-page h1 {
-    color: #000080;
+    color: #E74C3C;
     text-align: center;
-    font-family: "Great Vibes", serif;
+    font-family: "Rochester", serif;
     font-size: 55px;
+    text-shadow: 0px 0px 5px #000;
     margin: 0; }
 
 /* background image */
 .homepage-background {
-  background: url("/img/fancy_deboss.png");
+  background: url("/img/Optimized-bridge.jpeg");
   z-index: -1;
-  position: relative;
   position: absolute;
+  width: 100vw;
   height: 100vh;
-  width: 100vw; }
+  background-size: cover;
+  background-position: center; }
+
+.background-shading {
+  z-index: -1;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  /* For Safari 5.1 to 6.0 */
+  background: -webkit-linear-gradient(left, transparent, transparent, rgba(0, 0, 0, 0.75), transparent, transparent);
+  /* For Opera 11.1 to 12.0 */
+  background: -o-linear-gradient(left, transparent, transparent, rgba(0, 0, 0, 0.75), transparent, transparent);
+  /* For Fx 3.6 to 15 */
+  background: -moz-linear-gradient(left, transparent, transparent, rgba(0, 0, 0, 0.75), transparent, transparent);
+  /* Standard syntax */
+  background: linear-gradient(to right, left, left, transparent, transparent, rgba(0, 0, 0, 0.75), transparent, transparent); }
 
 /* centering content */
 .outer-div-for-centering {
@@ -500,8 +523,8 @@ pre {
   postion: absolute;
   height: 80vh;
   width: 100%;
-  height: -webkit-calc(100vh - 150px);
-  height: calc(100vh - 150px); }
+  height: -webkit-calc(100vh - 140px);
+  height: calc(100vh - 140px); }
 
 .middle-div-for-centering {
   display: table-cell;
@@ -522,15 +545,16 @@ pre {
     background: #e5e5e5;
     border-radius: 50px;
     padding: 5px 15px 5px 15px;
-    color: #000080; }
+    color: #E74C3C; }
   .homepage-link .page-link:hover {
     text-decoration: none;
-    color: #000080;
-    background: #ddd; }
+    color: #E74C3C;
+    background: #ddd;
+    font-style: italic; }
 
 /* footer */
 .home-footer-container > .site-footer {
-  background: #000080; }
+  background: #E74C3C; }
   .home-footer-container > .site-footer svg {
     fill: #fff; }
   .home-footer-container > .site-footer .footer-icon {
