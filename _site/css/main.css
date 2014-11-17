@@ -17,7 +17,6 @@ body {
   line-height: 1.5;
   font-weight: 300;
   color: #111;
-  background-color: #f8f8f8;
   -webkit-text-size-adjust: 100%; }
 
 /**
@@ -152,7 +151,7 @@ pre {
   position: relative; }
   .site-header .wrapper {
     border-radius: 50px;
-    background: url("/img/fancy_deboss.png");
+    background: #f0f0f0;
     margin-top: 5px; }
 
 .site-title {
