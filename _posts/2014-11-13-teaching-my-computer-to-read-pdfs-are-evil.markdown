@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Teaching my Computer to Read, Part 1: PDFs are Evil"
+title:  "Teaching my Computer to Read, Part 1: Struggles with PDFs and Short-Sightedness"
 date:   2014-11-13 5:11:00
 categories: cv pdf
 ---
@@ -35,7 +35,7 @@ Oops.
 
 Luckily, there are PDF rendering libraries out there. I spent about eight hours researching them and then four trying to get the one that I decided on, [ImageMagick](http://www.imagemagick.org/), installed properly. That adds up to about twelve hours of seriously considering renaming our endeavor from "The PDF Project" to "Who Needs PDFs Anyway", and pivoting to work exclusively with tried and true image formats: JPG, PNG. Old friends.
 
-So...ta-dah.
+So...we ended up with something that looks like this.
 
 ```python
 	def extractImages(pdf):
@@ -67,6 +67,6 @@ And that's my punishment for not doing my research and fully expecting to be abl
 
 Lesson learned.
 
-*Next Time: Skew detection!*
+*Next Time:* We delve into some *actual* document analysis with **skew detection!**
 
 
