@@ -12,3 +12,10 @@ github_username:  catherinemoresco
 
 # Build settings
 markdown: redcarpet
+
+analytics :
+  provider : google
+  google : 
+      tracking_id : 'UA-56925026-1'
+  getclicky :
+    site_id :
