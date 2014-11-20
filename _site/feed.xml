@@ -6,45 +6,96 @@
 </description>
     <link>http://catmores.co/</link>
     <atom:link href="http://catmores.co/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 17 Nov 2014 01:07:20 -0600</pubDate>
-    <lastBuildDate>Mon, 17 Nov 2014 01:07:20 -0600</lastBuildDate>
+    <pubDate>Wed, 19 Nov 2014 22:52:15 -0600</pubDate>
+    <lastBuildDate>Wed, 19 Nov 2014 22:52:15 -0600</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
-        <title>Pirate like it&#39;s 1989: Why Taylor Swift is not the Music Industry</title>
-        <description>&lt;p&gt;Let me put this out there, first: I genuinely like Taylor Swift. I really do. I have nothing but admiration for the way that she&amp;#39;s matured as a musician. She seems funny, and smart, and sweet. And her style, &lt;em&gt;oh my god&lt;/em&gt;, I can&amp;#39;t tell whether I have watched the music video for &amp;quot;Blank Space&amp;quot; around 300 times because of the catchy tune, or because Swift just looks &lt;em&gt;so on point&lt;/em&gt; in her lingerie and refined gowns and riding outfit (and that lipstick!).&lt;/p&gt;
+        <title>Teaching My Computer to Read, Part 2: Converting PDF to JPG, Again</title>
+        <description>&lt;p&gt;In my &lt;a href=&quot;http://0.0.0.0:4000/cv/pdf/2014/11/12/teaching-my-computer-to-read-pdfs-are-evil.html&quot;&gt;last post&lt;/a&gt;, I talked about how I frantically searched for ways to get my PDFs into JPGs, and how in a caffiene-fueled 4 AM haze I stumbled upon PythonMagick and decided to use it. &lt;/p&gt;
 
-&lt;p&gt;But, I will not buy her album. And I am skeptical about whether her bold move of removing her music from Spotify will usher in a new-old era of rushing to Target to buy CDs, felling that music-streaming giant in the process (if anything is to be responsible for that, it&amp;#39;s more likely to be &lt;a href=&quot;http://www.nytimes.com/2014/11/13/business/media/youtube-introduces-a-paid-service-called-music-key.html?_r=0&quot;&gt;Youtube&amp;#39;s new streaming service&lt;/a&gt;). &lt;/p&gt;
-
-&lt;p&gt;There are a lot of reasons that I think this is the case. Lots of arguments have been made about how the system that Swift is trying to reinstate can never work as long as piracy is possible (and easy to do), and Daniel Ek himself, CEO of Spotify, wrote a passionate &lt;a href=&quot;https://news.spotify.com/se/2014/11/11/2-billion-and-counting/&quot;&gt;defense of his company&amp;#39;s business model&lt;/a&gt;. He argues (quite convincingly, I think), that music streaming services are a niche in which the music industry can survive, in a world where the only barrier standing between a listener and a free album is a few seconds of Googling, a few minutes of downloading, and perhaps a momentary twinge of conscience--if that.&lt;/p&gt;
-
-&lt;p&gt;But I don&amp;#39;t think that Ek has much to fear, and I feel that the oversight that a lot of people are making is summed up nicely by the Bloomberg Businessweek cover below...&lt;/p&gt;
+&lt;p&gt;In my last post, I called it &amp;quot;slow&amp;quot; and &amp;quot;ugly&amp;quot; but I didn&amp;#39;t realize how true those words were until I tried to use my image-extracting module into the rest of our application, and started getting outputs like this:&lt;/p&gt;
 
 &lt;p align=&quot;center&quot;&gt;
-&lt;img src=&quot;/img/2014-11-16/TSwift_cover.jpg&quot;&gt;
+&lt;img src=&quot;/img/2014-11-19/imagemagicksucks.jpg&quot;&gt;
 &lt;/p&gt;
 
-&lt;p&gt;That is, &lt;em&gt;Taylor Swift is not the music indusry&lt;/em&gt;. &lt;/p&gt;
+&lt;p&gt;This is very bad. I don&amp;#39;t think I need to point that out. It&amp;#39;s especially bad when you consider the fact that this level of resolution takes over one second of processing per page to happen (as calculated by my highly scientific, &amp;quot;one-Mississippi-two-Mississippi&amp;quot; counting benchmark method. I would love to run actual tests on performance, but unfortunately this is a project I&amp;#39;m expected to finish within the week.).&lt;/p&gt;
 
-&lt;p&gt;She goes on talking about what she has &amp;quot;proved&amp;quot;, that &amp;quot;music has value&amp;quot; and that she sincerely hopes artists won&amp;#39;t &amp;quot;undervalue their art&amp;quot;. But, if she&amp;#39;s hoping for a revolution, she is being blind to the fact that &lt;em&gt;the average musician cannot do what she just did.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Increasing the image DPI helps, but the result still isn&amp;#39;t antialiased at all, so any result that can be achieved in a reasonable amount of time is going to look pretty bad.&lt;/p&gt;
 
-&lt;p&gt;Taylor Swift is the exception, not the rule. In addition to being a gorgeous, lovable girl with some vocal chords that belong on some sort of pop-star angel, she (or her marketing team, whichever) is an incredible businesswoman, and has managed to build a fanbase that is not rivaled by many. In a time when even other big-name artists like Lady Gaga struggle to sell albums, demand for Taylor&amp;#39;s have always been high. Her last album, &lt;em&gt;Red&lt;/em&gt;, was the fastest-selling album in over a decade, even without the media-grabbing Spotify-snubbing that has earned &lt;em&gt;1989&lt;/em&gt; so much press.&lt;/p&gt;
+&lt;p&gt;I figured there might be something in PythonMagick to help me out, so I looked for documentation, only to realize (to my horror) that there actually isn&amp;#39;t a whole lot of it.&lt;/p&gt;
 
-&lt;p&gt;The fact is, her album&amp;#39;s success, and her astronomical profits from it, are not a result of her splitting from Spotify, and perhaps not even from any value inherent in her art itself, but rather the value of the name and the brand she had already built and the throngs of fans over which she rules. And--though I like Taylor Swift, and I listen to her songs, and I lose no respect for her adorers--her headline-making move strikes me not as an industry leader helping others take a stand for their own artistic value, but rather the arrogant top player of a very difficult game blazing trails where others cannot follow. If a less well-known artist does not allow their listeners to hear their music on Spotify, they will not sell 1.2 million albums in their first week; &lt;em&gt;their music will just not be heard.&lt;/em&gt; (Or it will be pirated.)&lt;/p&gt;
+&lt;p&gt;There&amp;#39;s some in the package&amp;#39;s &lt;a href=&quot;http://www.imagemagick.org/download/python/README.txt&quot;&gt;readme&lt;/a&gt;, but it doesn&amp;#39;t seem to be particularly comprehensive; some of the methods I had already been using from some example code I had found on the internet weren&amp;#39;t even there. My alternatives were to try to infer what was going on from the documentation for &lt;a href=&quot;http://www.imagemagick.org/Magick++/Documentation.html&quot;&gt;Magick++&lt;/a&gt;, the C++ API, or to figure it out myself by running&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;PythonMagick&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PythonMagick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and seeing what it spat out. I tried this, and there was (Ah-HAH!) a method called antiAlias--but I gave that a shot, and it didn&amp;#39;t seem capable of operating on PDFs being read; perhaps my guess it that is meant for use with drawing functions.&lt;/p&gt;
 
-&lt;p&gt;Spotify emerged in response to a problem--declining album sales in the face of growing internet piracy. That problem is not going to go away, even in the face of Swift&amp;#39;s artistic ideals. It worked this time. It worked for her. But in the long-term, it will take more than this to uproot music streaming.&lt;/p&gt;
+&lt;p&gt;And that&amp;#39;s where I gave up on ImageMagick. I realized I could either keep on trying to hack togther something with it that would inevitably only increase runtime further, or I could go back to the drawing board.&lt;/p&gt;
+
+&lt;p&gt;I went back to the drawing board. As it turns out, ImageMagick performs its PDF rendering functions with calls to Ghostscript, anyway; I decided to do away with ImageMagick and escape from slow, poorly-documented, impossible-to-install PythonMagick hell by working with Ghostscript directly. Bertan Guven did some &lt;a href=&quot;http://bertanguven.com/faster-conversions-from-pdf-to-pngjpeg-imagemagick-vs-ghostscript/&quot;&gt;more scientific comparisons of Ghostscript and ImageMagick performance&lt;/a&gt;, and his results indicate that Ghostscript is significantly faster.&lt;/p&gt;
+
+&lt;p&gt;Ghostscript doesn&amp;#39;t have Python bindings, so I ran it as a subprocess--and, since we need to process the images after they are extracted (and writing each file and then reading it and then writing it again is definitely not the most efficient way to go about things), I redirected the file output to a buffer.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;## run ghostscript command as a subprocess and get output&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;pipe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subprocess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Popen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;gs -dNOPAUSE -sDEVICE=jpeg -sOutputFile=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%s&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tdout -dJPEGQ=100 -r300 -q &amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot; -c quit&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subprocess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PIPE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shell&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;communicate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+        &lt;span class=&quot;nb&quot;&gt;bytes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BytesIO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I only want to make one call to Ghostscript, but I also have multiple images to extract, so we have to parse the resulting byte stream to separate them, and then decode them using OpenCv.&lt;/p&gt;
+
+&lt;p&gt;All JPGs start with &lt;code&gt;b&amp;#39;\xff\xd8&amp;#39;&lt;/code&gt; and end with &lt;code&gt;b&amp;#39;\xff\xd9&amp;#39;&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;extractImages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;imgstart&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;imgend&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+
+        &lt;span class=&quot;c&quot;&gt;## parse for jpgs&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;decoded_images&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;next_img_start&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\xff\xd8&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next_img_start&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;next_img_end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\xff\xd9&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next_img_end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+
+            &lt;span class=&quot;c&quot;&gt;## get and decode image bytes&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;decoded_image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imdecode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fromstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next_img_start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next_img_end&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uint8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CV_LOAD_IMAGE_COLOR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;decoded_images&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decoded_image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next_img_end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decoded_images&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This returns a list of images, which is exactly what my previous implementation did--only this is significantly faster, and doesn&amp;#39;t rely on PythonMagick. &lt;/p&gt;
+
+&lt;p&gt;Here&amp;#39;s a sample result image, rendered at 300 DPI and which ran in a comparable amount of time to our original PythonMagick implementation:&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+&lt;img src=&quot;/img/2014-11-19/ghostscriptisawesome.jpg&quot; style=&quot;height:500px&quot;&gt;
+&lt;/p&gt;
+
+&lt;p&gt;I am happy.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Next Time:&lt;/em&gt; Skew detection! (For real this time, I promise. Sorry for the digression.)&lt;/p&gt;
 </description>
-        <pubDate>Sun, 16 Nov 2014 03:56:00 -0600</pubDate>
-        <link>http://catmores.co/opinions/2014/11/16/pirate-like-its-1989.html</link>
-        <guid isPermaLink="true">http://catmores.co/opinions/2014/11/16/pirate-like-its-1989.html</guid>
+        <pubDate>Wed, 19 Nov 2014 16:52:30 -0600</pubDate>
+        <link>http://catmores.co/pdf/2014/11/19/teaching-my-computer-to-read-not-good-enough.html</link>
+        <guid isPermaLink="true">http://catmores.co/pdf/2014/11/19/teaching-my-computer-to-read-not-good-enough.html</guid>
         
         
-        <category>opinions</category>
+        <category>pdf</category>
         
       </item>
     
       <item>
-        <title>Teaching my Computer to Read, Part 1: PDFs are Evil</title>
+        <title>Teaching my Computer to Read, Part 1: Struggles with PDFs and Short-Sightedness</title>
         <description>&lt;p&gt;My favorite computer science classes are the ones that let you build whatever you want. My Introduction to Programming class consisted of a class wiki with student-posted problems, that you could complete whenever you wanted, however you wanted, in whatever language you wanted. It was awesome. &lt;/p&gt;
 
 &lt;p&gt;My class this quarter, Software Construction, has a similar setup, though slightly more structured; working in teams of six, we get to present a proposal, complete with UML use case, class, and activity diagrams, and then implement it and test it rigorously.&lt;/p&gt;
@@ -74,7 +125,7 @@
 
 &lt;p&gt;Luckily, there are PDF rendering libraries out there. I spent about eight hours researching them and then four trying to get the one that I decided on, &lt;a href=&quot;http://www.imagemagick.org/&quot;&gt;ImageMagick&lt;/a&gt;, installed properly. That adds up to about twelve hours of seriously considering renaming our endeavor from &amp;quot;The PDF Project&amp;quot; to &amp;quot;Who Needs PDFs Anyway&amp;quot;, and pivoting to work exclusively with tried and true image formats: JPG, PNG. Old friends.&lt;/p&gt;
 
-&lt;p&gt;So...ta-dah.&lt;/p&gt;
+&lt;p&gt;So...we ended up with something that looks like this.&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;extractImages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pdf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
 
@@ -103,7 +154,14 @@
 
 &lt;p&gt;Lesson learned.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Next Time: Skew detection!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Next Time:&lt;/em&gt; We delve into some &lt;em&gt;actual&lt;/em&gt; document analysis with &lt;strong&gt;skew detection!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div style=&quot;background:#fadbd7;margin:5px -10px 5px -10px;border-radius:4px;padding:10px;&quot;&gt;
+&lt;span style=&quot;font-family:Raleway, Open Sans, sans-serif;&quot;&gt;Edit 11/19/14:&lt;/span&gt;
+&lt;br&gt;I have since created a considerably improved implementation of rasterizing PDF documents, this time without PythonMagick; it&#39;s described in my next post, &lt;a href=&quot;http://0.0.0.0:4000/pdf/2014/11/19/teaching-my-computer-to-read-not-good-enough.html&quot;&gt;Teaching My Computer to Read, Part 2: Converting PDF to JPG, Again&lt;/a&gt;.
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 12 Nov 2014 23:11:00 -0600</pubDate>
         <link>http://catmores.co/cv/pdf/2014/11/12/teaching-my-computer-to-read-pdfs-are-evil.html</link>

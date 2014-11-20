@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Teaching my Computer to Read, Part 1: PDFs are Evil</title>
+    <title>Teaching my Computer to Read, Part 1: Struggles with PDFs and Short-Sightedness</title>
     <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 ">
 
@@ -72,7 +72,7 @@
 </script>
 
   <header class="post-header">
-    <h1 class="post-title">Teaching my Computer to Read, Part 1: PDFs are Evil</h1>
+    <h1 class="post-title">Teaching my Computer to Read, Part 1: Struggles with PDFs and Short-Sightedness</h1>
     <p class="post-meta">Nov 12, 2014</p>
   </header>
 
@@ -106,7 +106,7 @@
 
 <p>Luckily, there are PDF rendering libraries out there. I spent about eight hours researching them and then four trying to get the one that I decided on, <a href="http://www.imagemagick.org/">ImageMagick</a>, installed properly. That adds up to about twelve hours of seriously considering renaming our endeavor from &quot;The PDF Project&quot; to &quot;Who Needs PDFs Anyway&quot;, and pivoting to work exclusively with tried and true image formats: JPG, PNG. Old friends.</p>
 
-<p>So...ta-dah.</p>
+<p>So...we ended up with something that looks like this.</p>
 <div class="highlight"><pre><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">extractImages</span><span class="p">(</span><span class="n">pdf</span><span class="p">):</span>
         <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -135,7 +135,14 @@
 
 <p>Lesson learned.</p>
 
-<p><em>Next Time: Skew detection!</em></p>
+<p><em>Next Time:</em> We delve into some <em>actual</em> document analysis with <strong>skew detection!</strong></p>
+
+<div style="background:#fadbd7;margin:5px -10px 5px -10px;border-radius:4px;padding:10px;">
+<span style="font-family:Raleway, Open Sans, sans-serif;">Edit 11/19/14:</span>
+<br>I have since created a considerably improved implementation of rasterizing PDF documents, this time without PythonMagick; it's described in my next post, <a href="http://0.0.0.0:4000/pdf/2014/11/19/teaching-my-computer-to-read-not-good-enough.html">Teaching My Computer to Read, Part 2: Converting PDF to JPG, Again</a>.
+</div>
+
+<p><br></p>
 
   </article>
 

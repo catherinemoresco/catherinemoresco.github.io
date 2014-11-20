@@ -5,6 +5,7 @@ date:   2014-11-13 5:11:00
 categories: cv pdf
 ---
 
+
 My favorite computer science classes are the ones that let you build whatever you want. My Introduction to Programming class consisted of a class wiki with student-posted problems, that you could complete whenever you wanted, however you wanted, in whatever language you wanted. It was awesome. 
 
 My class this quarter, Software Construction, has a similar setup, though slightly more structured; working in teams of six, we get to present a proposal, complete with UML use case, class, and activity diagrams, and then implement it and test it rigorously.
@@ -69,4 +70,9 @@ Lesson learned.
 
 *Next Time:* We delve into some *actual* document analysis with **skew detection!**
 
+<div style="background:#fadbd7;margin:5px -10px 5px -10px;border-radius:4px;padding:10px;">
+<span style="font-family:Raleway, Open Sans, sans-serif;">Edit 11/19/14:</span>
+<br>I have since created a considerably improved implementation of rasterizing PDF documents, this time without PythonMagick; it's described in my next post, <a href="http://0.0.0.0:4000/pdf/2014/11/19/teaching-my-computer-to-read-not-good-enough.html">Teaching My Computer to Read, Part 2: Converting PDF to JPG, Again</a>.
+</div>
+<br>
 
