@@ -15,7 +15,7 @@ Schoolwork is extremely modular. You work on a project, you submit it, you get a
 
 Real life isn't so climactic. For example, this website.
 
-I spent a lot of my summer builing and rebuilding my website--trying to perfect it, trying to figure out which fonts truly *embody* my *soul* (Raleway won out, but Open Sans will forever be dear to me) and painstakingly adjusting a color scheme, only to then decide that what I had constructed wasn't perfect, after all.
+I spent a lot of my summer building and rebuilding my website--trying to perfect it, trying to figure out which fonts truly *embody* my *soul* (Raleway won out, but Open Sans will forever be dear to me) and painstakingly adjusting a color scheme, only to then decide that what I had constructed wasn't perfect, after all.
 
 And then I realized that I was getting absolutely nowhere. This isn't a marriage proposal or a down payment on a house, it's a website. It can change. It can be imperfect, and the journey starting from its imperfections can (and hopefully will) be a valuable one. This scripty font? *Why not?* Navy blue? *Sure*.
 
