@@ -25,7 +25,7 @@ There's some in the package's [readme](http://www.imagemagick.org/download/pytho
 	import PythonMagick
 	dir(PythonMagick.Image())
 ```
-and seeing what it spat out. I tried this, and there was (Ah-HAH!) a method called antiAlias--but I gave that a shot, and it didn't seem capable of operating on PDFs being read; perhaps my guess it that is meant for use with drawing functions.
+and seeing what it spat out. I tried this, and there was (Ah-HAH!) a method called antiAlias--but I gave that a shot, and it didn't seem capable of operating on PDFs being read; my guess it that is meant for use with drawing functions.
 
 And that's where I gave up on ImageMagick. I realized I could either keep on trying to hack togther something with it that would inevitably only increase runtime further, or I could go back to the drawing board.
 
