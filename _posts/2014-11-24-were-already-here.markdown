@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "We're Already Here (Or, “Why I Am Not Impressed That You Shared That One Feminist Link On Facebook That One Time”)"
+title:  "We're Already Here"
+subtitle: "Or, “Why I Am Not Impressed That You Shared That One Feminist Link On Facebook That One Time”"
 date:   2014-11-24 12:30:23
 categories: 
 ---

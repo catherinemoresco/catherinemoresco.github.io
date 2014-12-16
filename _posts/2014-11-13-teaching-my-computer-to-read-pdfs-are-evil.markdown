@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Teaching my Computer to Read, Part 1: Struggles with PDFs and Short-Sightedness"
+title:  "Struggles with PDFs and Short-Sightedness"
+subtitle: "Teaching My Computer to Read, Part 1"
 date:   2014-11-13 5:11:00
 categories: cv pdf
 ---

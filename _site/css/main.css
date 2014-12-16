@@ -58,8 +58,8 @@ li > ol {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 300;
-  font-family: "Raleway", sans-serif; }
+  font-family: "Raleway", sans-serif;
+  font-weight: 800; }
 
 /**
  * Links
@@ -160,7 +160,8 @@ pre {
   letter-spacing: -1px;
   margin-bottom: 0;
   float: left;
-  font-family: "Raleway", sans-serif; }
+  font-family: "Raleway", sans-serif;
+  font-weight: 800; }
   .site-title, .site-title:visited {
     color: #E74C3C; }
 
@@ -293,6 +294,11 @@ svg {
 .post-link {
   display: block;
   font-size: 24px; }
+  .post-link > h2 {
+    margin-bottom: 0px;
+    font-weight: 800; }
+  .post-link > h5 {
+    font-weight: 500; }
 
 a.post-link {
   color: black; }
@@ -490,7 +496,8 @@ a.post-link {
     font-family: "Rochester", serif;
     font-size: 55px;
     text-shadow: 0px 0px 5px #000;
-    margin: 0; }
+    margin: 0;
+    font-weight: 400; }
 
 /* background image */
 .homepage-background {

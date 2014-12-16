@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Teaching My Computer to Read, Part 2: Converting PDF to JPG, Again"
+title:  "Converting PDF to JPG, Again"
+subtitle: "Teaching My Computer to Read, Part 2"
 date:   2014-11-19 22:52:30
 categories: pdf
 ---

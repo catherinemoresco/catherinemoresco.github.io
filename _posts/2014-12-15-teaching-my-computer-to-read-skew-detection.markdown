@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Teaching My Computer to Read, Part 3: Simple Skew Detection, As Promised"
+title:  "Simple Skew Detection, As Promised"
+subtitle: "Teaching My Computer to Read, Part 3"
 date:   2014-12-15 22:52:30
 categories: pdf
 ---

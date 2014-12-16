@@ -21,7 +21,7 @@
     margin-bottom: 0;
     float: left;
     font-family:$header-font-family;
-
+    font-weight: 800;
 
     &,
     &:visited {
@@ -207,6 +207,15 @@ svg{
 .post-link {
     display: block;
     font-size: 24px;
+
+    > h2 {
+        margin-bottom: 0px;
+        font-weight: 800;
+    }
+
+    > h5{
+        font-weight:500;
+    }
 }
 
 a.post-link{
