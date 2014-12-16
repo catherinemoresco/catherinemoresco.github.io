@@ -49,7 +49,7 @@ Now, if we rotate the image to its optimal angle, it looks like this:
 <img src="/img/2014-12-15/rowgraph.png" style="width:400px">
 </p>
 
-Really different! At first glance, qualitatively, this new graph looks a whole lot...spikier. There are more discernible hills and valleys, and they are much taller and wider.
+Really different! At first glance, qualitatively, this new graph looks a whole lot...spikier. There are more discernible hills and valleys, and they are much taller and wider. The valleys represent rows that follow along text lines, and the peaks represent places in which a row cuts between text lines, and is almost entirely white.
 
 The challenge is coming up with a measure of this "spiky-ness", and to do that we need to think about the quantitative features of this graph. Is there a good metric for examining the widths and height of these peaks and valleys?
 
