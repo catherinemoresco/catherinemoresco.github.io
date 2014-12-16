@@ -84,5 +84,5 @@ Here's a sample result image, rendered at 300 DPI and which ran in a comparable 
 
 I am happy.
 
-*Next Time:* Skew detection! (For real this time, I promise. Sorry for the digression.)
+*Next Time:* [Skew detection](http://catmores.co/pdf/2014/12/15/teaching-my-computer-to-read-skew-detection.html)! (For real this time, I promise. Sorry for the digression.)
 
