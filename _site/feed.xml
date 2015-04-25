@@ -6,8 +6,8 @@
 </description>
     <link>http://catmores.co/</link>
     <atom:link href="http://catmores.co/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 16 Dec 2014 16:10:20 -0500</pubDate>
-    <lastBuildDate>Tue, 16 Dec 2014 16:10:20 -0500</lastBuildDate>
+    <pubDate>Fri, 24 Apr 2015 23:04:08 -0500</pubDate>
+    <lastBuildDate>Fri, 24 Apr 2015 23:04:08 -0500</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -105,7 +105,7 @@
 
 &lt;p&gt;&lt;em&gt;Next time:&lt;/em&gt; Line detection!&lt;/p&gt;
 </description>
-        <pubDate>Mon, 15 Dec 2014 17:52:30 -0500</pubDate>
+        <pubDate>Mon, 15 Dec 2014 16:52:30 -0600</pubDate>
         <link>http://catmores.co/pdf/2014/12/15/teaching-my-computer-to-read-skew-detection.html</link>
         <guid isPermaLink="true">http://catmores.co/pdf/2014/12/15/teaching-my-computer-to-read-skew-detection.html</guid>
         
@@ -140,7 +140,7 @@
 
 &lt;p&gt;The problem isn’t just a matter of getting Women into Tech; the problem is keeping them here. And that problem will get a lot better once we face the fact that it exists—and that it demands not only institutional change, but changes in our personal attitudes, our perspectives, and ourselves.&lt;/p&gt;
 </description>
-        <pubDate>Mon, 24 Nov 2014 07:30:23 -0500</pubDate>
+        <pubDate>Mon, 24 Nov 2014 06:30:23 -0600</pubDate>
         <link>http://catmores.co/2014/11/24/were-already-here.html</link>
         <guid isPermaLink="true">http://catmores.co/2014/11/24/were-already-here.html</guid>
         
@@ -222,7 +222,7 @@
 
 &lt;p&gt;&lt;em&gt;Next Time:&lt;/em&gt; &lt;a href=&quot;http://catmores.co/pdf/2014/12/15/teaching-my-computer-to-read-skew-detection.html&quot;&gt;Skew detection&lt;/a&gt;! (For real this time, I promise. Sorry for the digression.)&lt;/p&gt;
 </description>
-        <pubDate>Wed, 19 Nov 2014 17:52:30 -0500</pubDate>
+        <pubDate>Wed, 19 Nov 2014 16:52:30 -0600</pubDate>
         <link>http://catmores.co/pdf/2014/11/19/teaching-my-computer-to-read-not-good-enough.html</link>
         <guid isPermaLink="true">http://catmores.co/pdf/2014/11/19/teaching-my-computer-to-read-not-good-enough.html</guid>
         
@@ -300,9 +300,9 @@
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 13 Nov 2014 00:11:00 -0500</pubDate>
-        <link>http://catmores.co/cv/pdf/2014/11/13/teaching-my-computer-to-read-pdfs-are-evil.html</link>
-        <guid isPermaLink="true">http://catmores.co/cv/pdf/2014/11/13/teaching-my-computer-to-read-pdfs-are-evil.html</guid>
+        <pubDate>Wed, 12 Nov 2014 23:11:00 -0600</pubDate>
+        <link>http://catmores.co/cv/pdf/2014/11/12/teaching-my-computer-to-read-pdfs-are-evil.html</link>
+        <guid isPermaLink="true">http://catmores.co/cv/pdf/2014/11/12/teaching-my-computer-to-read-pdfs-are-evil.html</guid>
         
         
         <category>cv</category>
@@ -331,7 +331,7 @@
 
 &lt;p&gt;So here it is: my blog. It&amp;#39;s imperfect, and it&amp;#39;s under construction...and I hope it will be that way for a long time.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 05 Oct 2014 07:37:00 -0400</pubDate>
+        <pubDate>Sun, 05 Oct 2014 06:37:00 -0500</pubDate>
         <link>http://catmores.co/2014/10/05/on-improving.html</link>
         <guid isPermaLink="true">http://catmores.co/2014/10/05/on-improving.html</guid>
         
@@ -342,7 +342,7 @@
         <title>Hello, world!</title>
         <description>&lt;p&gt;Here we are. I have a blog. I am blogging. Hooray!&lt;/p&gt;
 </description>
-        <pubDate>Tue, 30 Sep 2014 17:50:22 -0400</pubDate>
+        <pubDate>Tue, 30 Sep 2014 16:50:22 -0500</pubDate>
         <link>http://catmores.co/jekyll/update/2014/09/30/welcome-to-jekyll.html</link>
         <guid isPermaLink="true">http://catmores.co/jekyll/update/2014/09/30/welcome-to-jekyll.html</guid>
         
