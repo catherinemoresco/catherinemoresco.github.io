@@ -1,49 +1,50 @@
 /* homepage-specific styles */
 
 .landing-page{
-	text-align:center;
-	font-family: Raleway;
+    text-align:center;
+    font-family: Raleway;
 
-	h1{
-		color:$accent;
-		text-align:center;
-		font-family:$decorative-font-family;
-		font-size: 55px;
-		text-shadow:0px 0px 5px #000;
-		margin:0;
-		font-weight: 400;
-	}
+    h1{
+        color:$accent;
+        text-align:center;
+        font-family:$decorative-font-family;
+        font-size: 50px;
+        /*text-shadow:0px 0px 2px #000;*/
+        margin:0;
+        font-weight: normal;
+    }
 
 }
+
 
 /* background image */
 
 .homepage-background{
-	background: $background-image;
-	z-index: -1;
-	position: absolute;
-
-	width: 100vw;
-	height: 100vh;
-	background-size:cover;
-	background-position: center;
+    background: $background-image;
+    position: relative;
+    display:block;
+    width: 100vw;
+    height: 70vh;
+    min-height: 300px;
+    background-size:cover;
+    background-position: center;
 }
 
 .background-shading{
-	z-index: -1;
-	position: absolute;
-
-	width: 100vw;
-	height: 100vh;
-
-  /* For Safari 5.1 to 6.0 */
-  background: -webkit-linear-gradient(left,rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,.75), rgba(0,0,0,0), rgba(0,0,0,0));
-  /* For Opera 11.1 to 12.0 */
-  background: -o-linear-gradient(left,rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,.75), rgba(0,0,0,0), rgba(0,0,0,0));
-  /* For Fx 3.6 to 15 */
-  background: -moz-linear-gradient(left,rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,.75), rgba(0,0,0,0), rgba(0,0,0,0));
-  /* Standard syntax */
-  background: linear-gradient(to right, left,left,rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,.75), rgba(0,0,0,0), rgba(0,0,0,0)); 
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 70vh;
+    visibility: hidden;
+      /* For Safari 5.1 to 6.0 */
+      background: -webkit-linear-gradient(bottom,rgba(0,0,0,.5),rgba(0,0,0,0), rgba(0,0,0,0));
+      /* For Opera 11.1 to 12.0 */
+      background: -o-linear-gradient(top,rgba(0,0,0,.5),rgba(0,0,0,0), rgba(0,0,0,0));
+      /* For Fx 3.6 to 15 */
+      background: -moz-linear-gradient(top,rgba(0,0,0,.5),rgba(0,0,0,0), rgba(0,0,0,0));
+      /* Standard syntax */
+      background: linear-gradient(to bottom, top, top,rgba(0,0,0,.5),rgba(0,0,0,0), rgba(0,0,0,0)); 
 
 }
 
@@ -57,64 +58,65 @@
 } 
 
 .outer-div-for-centering{
-	display:table;
-	postion:absolute;
-	height: 80vh;
-	width: 100%;
- 	@include calc(height, "100vh - 140px");
+    display:table;
+    postion:absolute;
+    height: 80vh;
+    width: 100%;
+    @include calc(height, "100vh - 140px");
 }
 
 .middle-div-for-centering{
-	display:table-cell;
-	vertical-align:middle;
+    display:table-cell;
+    vertical-align:top;
 }
 
 .inner-div-for-centering{
-	margin-left:auto;
-	margin-right:auto;
-	width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+    width: 100%;
 }
 
 
 /* links */
 .homepage-link{
-	display:inline-block;
+    display:inline-block;
+    margin-bottom: $spacing-unit;
 
-	.page-link{
-		margin-left: 5px;
-		margin-right:5px;
-		font-size:12px;
-		background:#e5e5e5;
-		border-radius:50px;
-		padding:5px 15px 5px 15px;
-		color:$accent;
-	}
+    .page-link{
+        margin-left: 5px;
+        margin-right:5px;
+        font-size:12px;
+        background:white;
+        border-radius:50px;
+        padding:5px 15px 5px 15px;
+        color:$accent;
+    }
 
-	.page-link:hover{
-		text-decoration: none;
-		color:$accent;
-		background:#ddd;
-		font-style:italic;
-	}
+    .page-link:hover{
+        text-decoration: none;
+        color:$accent;
+        background:#ddd;
+        font-style:italic;
+    }
 }
 
 /* footer */
 
 .home-footer-container > .site-footer{
-	background:$accent;
+    /*background:$accent;*/
 
-	svg{
-		fill:#fff;
-	}
-	
-	.footer-icon{
-	    display:inline-block;
-	    width:100px;
-	    margin:0;
-	}
+    svg{
+        fill:$accent;
+    }
+    
+    .footer-icon{
+        display:inline-block;
+        width:100px;
+        margin:0;
+    }
 
-	.copyright{
-		color:#B43B2F;
-	}
+    .copyright{
+        color:$accent;
+    }
 }
 

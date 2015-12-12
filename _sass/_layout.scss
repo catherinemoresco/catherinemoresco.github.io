@@ -188,11 +188,13 @@ svg{
 
 .page-heading {
     font-size: 20px;
+    text-align: center;
 }
 
 .post-list {
     margin-left: 0;
     list-style: none;
+    text-align: center;
 
     > li {
         margin-bottom: $spacing-unit;
@@ -245,6 +247,7 @@ a.post-link{
  */
 .post-header {
     margin-bottom: $spacing-unit;
+    text-align: center;
 }
 
 .post-title {
@@ -252,8 +255,10 @@ a.post-link{
     letter-spacing: -1px;
     line-height: 1;
 
+
     @include media-query($on-laptop) {
         font-size: 36px;
+
     }
 }
 

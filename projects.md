@@ -6,6 +6,7 @@ permalink: /projects/
 
 <br>
 
+<div id="fpp"></div>
 # Fish Plays Pokemon
 <img src="/img/fpp1.jpg" style="width: 400px;margin-left:auto;margin-right:auto;display:block"/>
 
@@ -16,6 +17,7 @@ We also built <a href="http://api.fishplayspokemon.com">an API</a>!
   
 <br>
 
+<div id="scannd"></div>
 # Scannd: The PDF Project
 <img src="/img/pdf1.png" style="width: 400px;margin-left:auto;margin-right:auto;display:block"/>
 
@@ -23,6 +25,7 @@ A web-based PDF viewer that not only displays your document, but will also autom
 
 <br>
 
+<div id="bees"></div>
 
 # Bee News!
 <img src="/img/bee1.png" style="width: 400px;margin-left:auto;margin-right:auto;display:block"/>
@@ -32,6 +35,7 @@ A very simple app that scrapes Google News for the latest news about bees, and t
 <br>
 
 
+<div id="feedme"></div>
 
 # Feedme at UChicago
 <img src="/img/screenshot.png" style="width: 400px;margin-left:auto;margin-right:auto;display:block">

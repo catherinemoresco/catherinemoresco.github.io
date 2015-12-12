@@ -14,7 +14,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-    height: 100vh;
+    /*height: 100vh;*/
 
     font-family: $base-font-family;
     font-size: $base-font-size;
@@ -31,10 +31,11 @@ body {
  */
 h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
-ul, ol, dl, figure,
+ul, ol, dl, figure, .margin-bottom,
 %vertical-rhythm {
     margin-bottom: $spacing-unit / 2;
 }
+
 
 
 

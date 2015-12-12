@@ -11,7 +11,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  height: 100vh;
+  /*height: 100vh;*/
   font-family: Open Sans, sans-serif;
   font-size: 16px;
   line-height: 1.5;
@@ -24,7 +24,7 @@ body {
  */
 h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
-ul, ol, dl, figure,
+ul, ol, dl, figure, .margin-bottom,
 .highlight {
   margin-bottom: 15px; }
 
@@ -58,7 +58,7 @@ li > ol {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Raleway", sans-serif;
+  font-family: "Rubik", sans-serif;
   font-weight: 800; }
 
 /**
@@ -160,7 +160,7 @@ pre {
   letter-spacing: -1px;
   margin-bottom: 0;
   float: left;
-  font-family: "Raleway", sans-serif;
+  font-family: "Rubik", sans-serif;
   font-weight: 800; }
   .site-title, .site-title:visited {
     color: #E74C3C; }
@@ -279,11 +279,13 @@ svg {
   padding: 30px 0; }
 
 .page-heading {
-  font-size: 20px; }
+  font-size: 20px;
+  text-align: center; }
 
 .post-list {
   margin-left: 0;
-  list-style: none; }
+  list-style: none;
+  text-align: center; }
   .post-list > li {
     margin-bottom: 30px; }
 
@@ -319,7 +321,8 @@ a.post-link {
  * Posts
  */
 .post-header {
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  text-align: center; }
 
 .post-title {
   font-size: 42px;
@@ -493,35 +496,38 @@ a.post-link {
   .landing-page h1 {
     color: #E74C3C;
     text-align: center;
-    font-family: "Righteous", serif;
-    font-size: 55px;
-    text-shadow: 0px 0px 5px #000;
+    font-family: "Rubik", serif;
+    font-size: 50px;
+    /*text-shadow:0px 0px 2px #000;*/
     margin: 0;
-    font-weight: 400; }
+    font-weight: normal; }
 
 /* background image */
 .homepage-background {
-  background: url("/img/Optimized-bridge.jpeg");
-  z-index: -1;
-  position: absolute;
+  background: url("/img/happieselfie2.jpg");
+  position: relative;
+  display: block;
   width: 100vw;
-  height: 100vh;
+  height: 70vh;
+  min-height: 300px;
   background-size: cover;
   background-position: center; }
 
 .background-shading {
-  z-index: -1;
+  z-index: 1;
   position: absolute;
+  top: 0;
   width: 100vw;
-  height: 100vh;
+  height: 70vh;
+  visibility: hidden;
   /* For Safari 5.1 to 6.0 */
-  background: -webkit-linear-gradient(left, transparent, transparent, rgba(0, 0, 0, 0.75), transparent, transparent);
+  background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5), transparent, transparent);
   /* For Opera 11.1 to 12.0 */
-  background: -o-linear-gradient(left, transparent, transparent, rgba(0, 0, 0, 0.75), transparent, transparent);
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.5), transparent, transparent);
   /* For Fx 3.6 to 15 */
-  background: -moz-linear-gradient(left, transparent, transparent, rgba(0, 0, 0, 0.75), transparent, transparent);
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), transparent, transparent);
   /* Standard syntax */
-  background: linear-gradient(to right, left, left, transparent, transparent, rgba(0, 0, 0, 0.75), transparent, transparent); }
+  background: linear-gradient(to bottom, top, top, rgba(0, 0, 0, 0.5), transparent, transparent); }
 
 /* centering content */
 .outer-div-for-centering {
@@ -534,7 +540,7 @@ a.post-link {
 
 .middle-div-for-centering {
   display: table-cell;
-  vertical-align: middle; }
+  vertical-align: top; }
 
 .inner-div-for-centering {
   margin-left: auto;
@@ -543,12 +549,13 @@ a.post-link {
 
 /* links */
 .homepage-link {
-  display: inline-block; }
+  display: inline-block;
+  margin-bottom: 30px; }
   .homepage-link .page-link {
     margin-left: 5px;
     margin-right: 5px;
     font-size: 12px;
-    background: #e5e5e5;
+    background: white;
     border-radius: 50px;
     padding: 5px 15px 5px 15px;
     color: #E74C3C; }
@@ -560,12 +567,12 @@ a.post-link {
 
 /* footer */
 .home-footer-container > .site-footer {
-  background: #E74C3C; }
+  /*background:$accent;*/ }
   .home-footer-container > .site-footer svg {
-    fill: #fff; }
+    fill: #E74C3C; }
   .home-footer-container > .site-footer .footer-icon {
     display: inline-block;
     width: 100px;
     margin: 0; }
   .home-footer-container > .site-footer .copyright {
-    color: #B43B2F; }
+    color: #E74C3C; }
