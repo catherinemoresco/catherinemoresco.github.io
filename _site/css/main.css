@@ -150,9 +150,21 @@ pre {
   min-height: 56px;
   position: relative; }
   .site-header .wrapper {
-    border-radius: 50px;
-    background: #f0f0f0;
-    margin-top: 5px; }
+    border-radius: 2px;
+    position: relative;
+    /*background:$grey-color-lighter;*/ }
+    .site-header .wrapper .bottom-border {
+      z-index: -1;
+      margin-top: 5px;
+      border-bottom: solid 2px #E74C3C;
+      position: absolute;
+      bottom: 0;
+      width: -webkit-calc(100% - (30px * 2));
+      width: calc(100% - (30px * 2)); }
+      @media screen and (max-width: 800px) {
+        .site-header .wrapper .bottom-border {
+          width: -webkit-calc(100% - (30px));
+          width: calc(100% - (30px)); } }
 
 .site-title {
   font-size: 26px;
@@ -171,6 +183,7 @@ pre {
   .site-nav .menu-icon {
     display: none; }
   .site-nav .page-link {
+    font-family: "Rubik", serif;
     color: #E74C3C;
     line-height: 1.5; }
     .site-nav .page-link:not(:first-child) {
@@ -504,7 +517,7 @@ a.post-link {
 
 /* background image */
 .homepage-background {
-  background: url("/img/happieselfie2.jpg");
+  background: url("/img/happieselfie2.JPG");
   position: relative;
   display: block;
   width: 100vw;

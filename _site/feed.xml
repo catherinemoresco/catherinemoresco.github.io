@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Catherine Moresco</title>
-    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-</description>
+    <description></description>
     <link>http://catmores.co/</link>
     <atom:link href="http://catmores.co/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 12 Dec 2015 03:20:01 -0600</pubDate>
-    <lastBuildDate>Sat, 12 Dec 2015 03:20:01 -0600</lastBuildDate>
+    <pubDate>Sun, 13 Dec 2015 10:58:11 -0600</pubDate>
+    <lastBuildDate>Sun, 13 Dec 2015 10:58:11 -0600</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>

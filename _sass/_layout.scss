@@ -8,9 +8,24 @@
     position: relative;
 
     .wrapper{
-        border-radius: 50px;
-        background:$grey-color-lighter;
-        margin-top:5px;
+            border-radius: 2px;
+            position: relative;
+            /*background:$grey-color-lighter;*/
+            .bottom-border{
+                z-index: -1;
+                margin-top:5px;
+                border-bottom: solid 2px $accent;
+                position: absolute;
+                bottom: 0;
+                width: -webkit-calc(100% - (#{$spacing-unit} * 2));
+                width:         calc(100% - (#{$spacing-unit} * 2));
+
+                @include media-query($on-laptop) {
+                    width: -webkit-calc(100% - (#{$spacing-unit}));
+                    width:         calc(100% - (#{$spacing-unit}));
+                }
+
+        }
     }
 }
 
@@ -38,6 +53,7 @@
     }
 
     .page-link {
+        font-family: $decorative-font-family;
         color: $accent;
         line-height: $base-line-height;
 
