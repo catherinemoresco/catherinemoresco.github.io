@@ -2,7 +2,7 @@
 layout: post
 title:  "On improving"
 date:   2014-10-5 11:37:00
-categories:
+categories: personal
 ---
 
 *Perfectionism.*

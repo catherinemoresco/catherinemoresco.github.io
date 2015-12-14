@@ -3,7 +3,8 @@ layout: post
 title:  "Converting PDF to JPG, Again"
 subtitle: "Teaching My Computer to Read, Part 2"
 date:   2014-11-19 22:52:30
-categories: pdf
+categories: technical
+tags: pdf
 ---
 
 In my [last post](http://0.0.0.0:4000/cv/pdf/2014/11/12/teaching-my-computer-to-read-pdfs-are-evil.html), I talked about how I frantically searched for ways to get my PDFs into JPGs, and how in a caffiene-fueled 4 AM haze I stumbled upon PythonMagick and decided to use it. 

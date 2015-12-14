@@ -1,9 +1,10 @@
 ---
 layout: post
 title:  "We're Already Here"
-subtitle: "Or, “Why I Am Not Impressed That You Shared That One Feminist Link On Facebook That One Time”"
+subtitle: "or, “Why I Am Not Impressed That You Shared That One Feminist Link On Facebook That One Time”"
 date:   2014-11-24 12:30:23
-categories: 
+categories: culture
+tags: women-in-tech
 ---
 
 

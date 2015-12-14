@@ -3,7 +3,8 @@ layout: post
 title:  "Simple Skew Detection, As Promised"
 subtitle: "Teaching My Computer to Read, Part 3"
 date:   2014-12-15 22:52:30
-categories: pdf
+categories: technical
+tags: pdf document-analysis computer-vision
 ---
 
 There's more than one way to skin a cat...or so I've heard. There's also more than one way to straighten document pages, which is both more fun and more algorithmically complex.
