@@ -5,8 +5,8 @@
     <description></description>
     <link>http://catmores.co/</link>
     <atom:link href="http://catmores.co/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 13 Dec 2015 21:20:19 -0500</pubDate>
-    <lastBuildDate>Sun, 13 Dec 2015 21:20:19 -0500</lastBuildDate>
+    <pubDate>Mon, 14 Dec 2015 03:57:06 -0500</pubDate>
+    <lastBuildDate>Mon, 14 Dec 2015 03:57:06 -0500</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -229,7 +229,7 @@
 
 &lt;p&gt;I am happy.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Next Time:&lt;/em&gt; &lt;a href=&quot;http://catmores.co/pdf/2014/12/15/teaching-my-computer-to-read-skew-detection.html&quot;&gt;Skew detection&lt;/a&gt;! (For real this time, I promise. Sorry for the digression.)&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Next Time:&lt;/em&gt; &lt;a href=&quot;http://catmores.co/technical/2014/12/15/teaching-my-computer-to-read-skew-detection.html&quot;&gt;Skew detection&lt;/a&gt;! (For real this time, I promise. Sorry for the digression.)&lt;/p&gt;
 </description>
         <pubDate>Wed, 19 Nov 2014 17:52:30 -0500</pubDate>
         <link>http://catmores.co/technical/2014/11/19/teaching-my-computer-to-read-not-good-enough.html</link>
@@ -306,7 +306,7 @@
 
 &lt;div style=&quot;background:#fadbd7;margin:5px -10px 5px -10px;border-radius:4px;padding:10px;&quot;&gt;
 &lt;span style=&quot;font-family:Raleway, Open Sans, sans-serif;&quot;&gt;Edit 11/19/14:&lt;/span&gt;
-&lt;br&gt;I have since created a considerably improved implementation of rasterizing PDF documents, this time without PythonMagick; it&#39;s described in my next post, &lt;a href=&quot;http://catmores.co/pdf/2014/11/19/teaching-my-computer-to-read-not-good-enough.html&quot;&gt;Teaching My Computer to Read, Part 2: Converting PDF to JPG, Again&lt;/a&gt;.
+&lt;br&gt;I have since created a considerably improved implementation of rasterizing PDF documents, this time without PythonMagick; it&#39;s described in my next post, &lt;a href=&quot;http://catmores.co/technical/2014/11/19/teaching-my-computer-to-read-not-good-enough.html&quot;&gt;Teaching My Computer to Read, Part 2: Converting PDF to JPG, Again&lt;/a&gt;.
 &lt;/div&gt;
 
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
