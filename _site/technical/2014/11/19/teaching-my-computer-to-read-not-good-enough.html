@@ -105,11 +105,10 @@
 
 <p>There’s some in the package’s <a href="http://www.imagemagick.org/download/python/README.txt">readme</a>, but it doesn’t seem to be particularly comprehensive; some of the methods I had already been using from some example code I had found on the internet weren’t even there. My alternatives were to try to infer what was going on from the documentation for <a href="http://www.imagemagick.org/Magick++/Documentation.html">Magick++</a>, the C++ API, or to figure it out myself by running</p>
 
-<p><code>python
-	import PythonMagick
-	dir(PythonMagick.Image())
-</code>
-and seeing what it spat out. I tried this, and there was (Ah-HAH!) a method called antiAlias–but I gave that a shot, and it didn’t seem capable of operating on PDFs being read; my guess it that is meant for use with drawing functions.</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">PythonMagick</span>
+	<span class="nb">dir</span><span class="p">(</span><span class="n">PythonMagick</span><span class="o">.</span><span class="n">Image</span><span class="p">())</span></code></pre></div>
+
+<p>and seeing what it spat out. I tried this, and there was (Ah-HAH!) a method called antiAlias–but I gave that a shot, and it didn’t seem capable of operating on PDFs being read; my guess it that is meant for use with drawing functions.</p>
 
 <p>And that’s where I gave up on ImageMagick. I realized I could either keep on trying to hack togther something with it that would inevitably only increase runtime further, or I could go back to the drawing board.</p>
 
@@ -117,46 +116,42 @@ and seeing what it spat out. I tried this, and there was (Ah-HAH!) a method call
 
 <p>Ghostscript doesn’t have Python bindings, so I ran it as a subprocess–and, since we need to process the images after they are extracted (and writing each file and then reading it and then writing it again is definitely not the most efficient way to go about things), I redirected the file output to a buffer.</p>
 
-<p>```python
-	def getStream(filename):
-	    ## run ghostscript command as a subprocess and get output
-	    pipe = subprocess.Popen(“gs -dNOPAUSE -sDEVICE=jpeg -sOutputFile=%stdout -dJPEGQ=100 -r300 -q “+ filename + “ -c quit”, stdout=subprocess.PIPE, shell=True)
-	    out, err = pipe.communicate()</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">getStream</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+	    <span class="c">## run ghostscript command as a subprocess and get output</span>
+	    <span class="n">pipe</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="s">&quot;gs -dNOPAUSE -sDEVICE=jpeg -sOutputFile=</span><span class="si">%s</span><span class="s">tdout -dJPEGQ=100 -r300 -q &quot;</span><span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s">&quot; -c quit&quot;</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	    <span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
 
-<pre><code>    bytes = io.BytesIO(out)
-    stream = bytes.read()
+	    <span class="nb">bytes</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+	    <span class="n">stream</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
-    return stream ```
-</code></pre>
+	    <span class="k">return</span> <span class="n">stream</span></code></pre></div>
 
 <p>I only want to make one call to Ghostscript, but I also have multiple images to extract, so we have to parse the resulting byte stream to separate them, and then decode them using OpenCv.</p>
 
 <p>All JPGs start with <code>b'\xff\xd8'</code> and end with <code>b'\xff\xd9'</code>.</p>
 
-<p>```python
-	def extractImages(filename): 
-	    stream = getStream(filename)</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">extractImages</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span> 
+	    <span class="n">stream</span> <span class="o">=</span> <span class="n">getStream</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
-<pre><code>    imgstart = 0
-    imgend = 0
-    i = 0
+	    <span class="n">imgstart</span> <span class="o">=</span> <span class="mi">0</span>
+	    <span class="n">imgend</span> <span class="o">=</span> <span class="mi">0</span>
+	    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 
-    ## parse for jpgs
-    decoded_images = []
-    while True:
-        next_img_start = stream.find(b'\xff\xd8', i)
-        if next_img_start &lt; 0:
-            break
-        next_img_end = stream.find(b'\xff\xd9', i)
-        if next_img_end &lt; 0:
-            break
+	    <span class="c">## parse for jpgs</span>
+	    <span class="n">decoded_images</span> <span class="o">=</span> <span class="p">[]</span>
+	    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+	        <span class="n">next_img_start</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\xff\xd8</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+	        <span class="k">if</span> <span class="n">next_img_start</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+	            <span class="k">break</span>
+	        <span class="n">next_img_end</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\xff\xd9</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+	        <span class="k">if</span> <span class="n">next_img_end</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+	            <span class="k">break</span>
 
-        ## get and decode image bytes
-        decoded_image = cv2.imdecode(np.fromstring(stream[next_img_start:next_img_end+2], np.uint8), cv2.CV_LOAD_IMAGE_COLOR)
-        decoded_images.append(decoded_image)
-        i = next_img_end + 2
-    return decoded_images ```
-</code></pre>
+	        <span class="c">## get and decode image bytes</span>
+	        <span class="n">decoded_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imdecode</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">stream</span><span class="p">[</span><span class="n">next_img_start</span><span class="p">:</span><span class="n">next_img_end</span><span class="o">+</span><span class="mi">2</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_LOAD_IMAGE_COLOR</span><span class="p">)</span>
+	        <span class="n">decoded_images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">decoded_image</span><span class="p">)</span>
+	        <span class="n">i</span> <span class="o">=</span> <span class="n">next_img_end</span> <span class="o">+</span> <span class="mi">2</span>
+	    <span class="k">return</span> <span class="n">decoded_images</span></code></pre></div>
 
 <p>This returns a list of images, which is exactly what my previous implementation did–only this is significantly faster, and doesn’t rely on PythonMagick. </p>
 

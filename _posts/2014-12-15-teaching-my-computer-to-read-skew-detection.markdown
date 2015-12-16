@@ -68,7 +68,7 @@ Numpy, conveniently, has var() method that will compute the variance of the arra
 
 This what we utilize in out implementation, iterating through a series of image rotations and calculating the variance of each in an attempt to maximize. 
 
-```python
+{%highlight python%}
 	## Iterate through range of angles to find maximum row sum variance
 	variances = {}
 	for x in range(-45, 45, 5):
@@ -78,7 +78,7 @@ This what we utilize in out implementation, iterating through a series of image 
 	for i in range(angle-5, angle+5):
 		variances[np.var(horizontal_sums(rotate(img, i)))] = i
 	angle = variances[max(variances.keys())]
-```
+{%endhighlight%}
 (View the full source [here](https://github.com/catherinemoresco/PDFProject/blob/master/pdfproject/skew.py).)
 
 This is an implementation that can be optimized further, especially with regard to angle iteration--currently, the algorithm rotates the image 28 times before an optimal value is reached. It may seem inefficient that to rotate the image every time to calculate variance, but numpy's `sum` function can only operate along matrix rows and columns, and accessing individual pixel values in an attempt to approximate sums of a rotated image is highly inefficient.
@@ -96,6 +96,6 @@ To solve the problem of coarse rotation, I added a new page in which the user te
 
 And there you go! Skew detection reliable enough that I felt comfortable not including a "your algorithm messed up, let me do it myself" button anywhere...like I had to do for line detection.
 
-*Last Time:* [PDF Image Extraction!](http://catmores.co/pdf/2014/11/19/teaching-my-computer-to-read-not-good-enough.html)
+*Last Time:* [PDF Image Extraction!](http://catmores.co/technical/2014/11/19/teaching-my-computer-to-read-not-good-enough.html)
 
 *Next time:* Line detection!

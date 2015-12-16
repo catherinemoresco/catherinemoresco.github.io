@@ -120,29 +120,27 @@
 
 <p>So…we ended up with something that looks like this.</p>
 
-<p>```python
-	def extractImages(pdf):
-	    images = []</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">extractImages</span><span class="p">(</span><span class="n">pdf</span><span class="p">):</span>
+	    <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
 
-<pre><code>    pdf_im = PyPDF2.PdfFileReader(pdf)
-    npage = pdf_im.getNumPages()
+	    <span class="n">pdf_im</span> <span class="o">=</span> <span class="n">PyPDF2</span><span class="o">.</span><span class="n">PdfFileReader</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span>
+	    <span class="n">npage</span> <span class="o">=</span> <span class="n">pdf_im</span><span class="o">.</span><span class="n">getNumPages</span><span class="p">()</span>
 
-    for p in range(0, npage):
-        img = PythonMagick.Image()
-        blob = PythonMagick.Blob()
-        img.density("75")
-        ## read in pdf
-        img.read(pdf+"[" + str(p) + "]") 
+	    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">npage</span><span class="p">):</span>
+	        <span class="n">img</span> <span class="o">=</span> <span class="n">PythonMagick</span><span class="o">.</span><span class="n">Image</span><span class="p">()</span>
+	        <span class="n">blob</span> <span class="o">=</span> <span class="n">PythonMagick</span><span class="o">.</span><span class="n">Blob</span><span class="p">()</span>
+	        <span class="n">img</span><span class="o">.</span><span class="n">density</span><span class="p">(</span><span class="s">&quot;75&quot;</span><span class="p">)</span>
+	        <span class="c">## read in pdf</span>
+	        <span class="n">img</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">pdf</span><span class="o">+</span><span class="s">&quot;[&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;]&quot;</span><span class="p">)</span> 
 
-        ## write to buffer
-        img.write(blob, 'RGB', 16)
-        rawdata =  base64.b64decode(blob.base64())
+	        <span class="c">## write to buffer</span>
+	        <span class="n">img</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">blob</span><span class="p">,</span> <span class="s">&#39;RGB&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+	        <span class="n">rawdata</span> <span class="o">=</span>  <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">blob</span><span class="o">.</span><span class="n">base64</span><span class="p">())</span>
 
-        ## convert raw data to np array
-        img = np.ndarray((img.rows(), img.columns(), 3),dtype='uint16', buffer=rawdata)
-        images.append(img)
-    return images ```
-</code></pre>
+	        <span class="c">## convert raw data to np array</span>
+	        <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">((</span><span class="n">img</span><span class="o">.</span><span class="n">rows</span><span class="p">(),</span> <span class="n">img</span><span class="o">.</span><span class="n">columns</span><span class="p">(),</span> <span class="mi">3</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="s">&#39;uint16&#39;</span><span class="p">,</span> <span class="nb">buffer</span><span class="o">=</span><span class="n">rawdata</span><span class="p">)</span>
+	        <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+	    <span class="k">return</span> <span class="n">images</span></code></pre></div>
 
 <p>It’s simple, and slow, and a little ugly, and it brings another third-party dependency into our cobbled-together little app, but it works.</p>
 

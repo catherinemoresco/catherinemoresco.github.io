@@ -40,7 +40,7 @@ Luckily, there are PDF rendering libraries out there. I spent about eight hours 
 
 So...we ended up with something that looks like this.
 
-```python
+{% highlight python%}
 	def extractImages(pdf):
 	    images = []
 
@@ -62,7 +62,7 @@ So...we ended up with something that looks like this.
 	        img = np.ndarray((img.rows(), img.columns(), 3),dtype='uint16', buffer=rawdata)
 	        images.append(img)
 	    return images
-```
+{%endhighlight%}
 
 It's simple, and slow, and a little ugly, and it brings another third-party dependency into our cobbled-together little app, but it works.
 

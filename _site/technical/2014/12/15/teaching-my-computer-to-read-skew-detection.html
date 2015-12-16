@@ -152,18 +152,17 @@
 
 <p>This what we utilize in out implementation, iterating through a series of image rotations and calculating the variance of each in an attempt to maximize. </p>
 
-<p><code>python
-	## Iterate through range of angles to find maximum row sum variance
-	variances = {}
-	for x in range(-45, 45, 5):
-		variances[np.var(horizontal_sums(rotate(img, x)))] = x
-	angle = variances[max(variances.keys())]
-	## Iterate through a finer range of values around previous result
-	for i in range(angle-5, angle+5):
-		variances[np.var(horizontal_sums(rotate(img, i)))] = i
-	angle = variances[max(variances.keys())]
-</code>
-(View the full source <a href="https://github.com/catherinemoresco/PDFProject/blob/master/pdfproject/skew.py">here</a>.)</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c">## Iterate through range of angles to find maximum row sum variance</span>
+	<span class="n">variances</span> <span class="o">=</span> <span class="p">{}</span>
+	<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+		<span class="n">variances</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">horizontal_sums</span><span class="p">(</span><span class="n">rotate</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">x</span><span class="p">)))]</span> <span class="o">=</span> <span class="n">x</span>
+	<span class="n">angle</span> <span class="o">=</span> <span class="n">variances</span><span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">variances</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+	<span class="c">## Iterate through a finer range of values around previous result</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">angle</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">angle</span><span class="o">+</span><span class="mi">5</span><span class="p">):</span>
+		<span class="n">variances</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">horizontal_sums</span><span class="p">(</span><span class="n">rotate</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">i</span><span class="p">)))]</span> <span class="o">=</span> <span class="n">i</span>
+	<span class="n">angle</span> <span class="o">=</span> <span class="n">variances</span><span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">variances</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span></code></pre></div>
+
+<p>(View the full source <a href="https://github.com/catherinemoresco/PDFProject/blob/master/pdfproject/skew.py">here</a>.)</p>
 
 <p>This is an implementation that can be optimized further, especially with regard to angle iteration–currently, the algorithm rotates the image 28 times before an optimal value is reached. It may seem inefficient that to rotate the image every time to calculate variance, but numpy’s <code>sum</code> function can only operate along matrix rows and columns, and accessing individual pixel values in an attempt to approximate sums of a rotated image is highly inefficient.</p>
 
@@ -179,7 +178,7 @@
 
 <p>And there you go! Skew detection reliable enough that I felt comfortable not including a “your algorithm messed up, let me do it myself” button anywhere…like I had to do for line detection.</p>
 
-<p><em>Last Time:</em> <a href="http://catmores.co/pdf/2014/11/19/teaching-my-computer-to-read-not-good-enough.html">PDF Image Extraction!</a></p>
+<p><em>Last Time:</em> <a href="http://catmores.co/technical/2014/11/19/teaching-my-computer-to-read-not-good-enough.html">PDF Image Extraction!</a></p>
 
 <p><em>Next time:</em> Line detection!</p>
 

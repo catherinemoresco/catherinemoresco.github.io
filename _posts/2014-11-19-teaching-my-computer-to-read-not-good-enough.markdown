@@ -23,10 +23,11 @@ I figured there might be something in PythonMagick to help me out, so I looked f
 
 There's some in the package's [readme](http://www.imagemagick.org/download/python/README.txt), but it doesn't seem to be particularly comprehensive; some of the methods I had already been using from some example code I had found on the internet weren't even there. My alternatives were to try to infer what was going on from the documentation for [Magick++](http://www.imagemagick.org/Magick++/Documentation.html), the C++ API, or to figure it out myself by running
 
-```python
+{% highlight python%}
 	import PythonMagick
 	dir(PythonMagick.Image())
-```
+{%endhighlight%}
+
 and seeing what it spat out. I tried this, and there was (Ah-HAH!) a method called antiAlias--but I gave that a shot, and it didn't seem capable of operating on PDFs being read; my guess it that is meant for use with drawing functions.
 
 And that's where I gave up on ImageMagick. I realized I could either keep on trying to hack togther something with it that would inevitably only increase runtime further, or I could go back to the drawing board.
@@ -35,7 +36,7 @@ I went back to the drawing board. As it turns out, ImageMagick performs its PDF 
 
 Ghostscript doesn't have Python bindings, so I ran it as a subprocess--and, since we need to process the images after they are extracted (and writing each file and then reading it and then writing it again is definitely not the most efficient way to go about things), I redirected the file output to a buffer.
 
-```python
+{%highlight python%}
 	def getStream(filename):
 	    ## run ghostscript command as a subprocess and get output
 	    pipe = subprocess.Popen("gs -dNOPAUSE -sDEVICE=jpeg -sOutputFile=%stdout -dJPEGQ=100 -r300 -q "+ filename + " -c quit", stdout=subprocess.PIPE, shell=True)
@@ -45,13 +46,13 @@ Ghostscript doesn't have Python bindings, so I ran it as a subprocess--and, sinc
 	    stream = bytes.read()
 
 	    return stream
-```
+{%endhighlight%}
 
 I only want to make one call to Ghostscript, but I also have multiple images to extract, so we have to parse the resulting byte stream to separate them, and then decode them using OpenCv.
 
 All JPGs start with `b'\xff\xd8'` and end with `b'\xff\xd9'`.
 
-```python
+{%highlight python%}
 	def extractImages(filename): 
 	    stream = getStream(filename)
 
@@ -74,7 +75,7 @@ All JPGs start with `b'\xff\xd8'` and end with `b'\xff\xd9'`.
 	        decoded_images.append(decoded_image)
 	        i = next_img_end + 2
 	    return decoded_images
-```
+{%endhighlight%}
 
 This returns a list of images, which is exactly what my previous implementation did--only this is significantly faster, and doesn't rely on PythonMagick. 
 
