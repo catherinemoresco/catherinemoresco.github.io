@@ -91,76 +91,85 @@
   <article class="post-content">
     <p>In my <a href="http://0.0.0.0:4000/cv/pdf/2014/11/12/teaching-my-computer-to-read-pdfs-are-evil.html">last post</a>, I talked about how I frantically searched for ways to get my PDFs into JPGs, and how in a caffiene-fueled 4 AM haze I stumbled upon PythonMagick and decided to use it. </p>
 
-<p>In my last post, I called it &quot;slow&quot; and &quot;ugly&quot; but I didn&#39;t realize how true those words were until I tried to use my image-extracting module into the rest of our application, and started getting outputs like this:</p>
+<p>In my last post, I called it “slow” and “ugly” but I didn’t realize how true those words were until I tried to use my image-extracting module into the rest of our application, and started getting outputs like this:</p>
 
 <p align="center">
-<img src="/img/2014-11-19/imagemagicksucks.jpg">
+<img src="/img/2014-11-19/imagemagicksucks.jpg" />
 </p>
 
-<p>This is very bad. I don&#39;t think I need to point that out. It&#39;s especially bad when you consider the fact that this level of resolution takes over one second of processing per page to happen (as calculated by my highly scientific, &quot;one-Mississippi-two-Mississippi&quot; counting benchmark method. I would love to run actual tests on performance, but unfortunately this is a project I&#39;m expected to finish within the week.).</p>
+<p>This is very bad. I don’t think I need to point that out. It’s especially bad when you consider the fact that this level of resolution takes over one second of processing per page to happen (as calculated by my highly scientific, “one-Mississippi-two-Mississippi” counting benchmark method. I would love to run actual tests on performance, but unfortunately this is a project I’m expected to finish within the week.).</p>
 
-<p>Increasing the image DPI helps, but the result still isn&#39;t antialiased at all, so any result that can be achieved in a reasonable amount of time is going to look pretty bad.</p>
+<p>Increasing the image DPI helps, but the result still isn’t antialiased at all, so any result that can be achieved in a reasonable amount of time is going to look pretty bad.</p>
 
-<p>I figured there might be something in PythonMagick to help me out, so I looked for documentation, only to realize (to my horror) that there actually isn&#39;t a whole lot of it.</p>
+<p>I figured there might be something in PythonMagick to help me out, so I looked for documentation, only to realize (to my horror) that there actually isn’t a whole lot of it.</p>
 
-<p>There&#39;s some in the package&#39;s <a href="http://www.imagemagick.org/download/python/README.txt">readme</a>, but it doesn&#39;t seem to be particularly comprehensive; some of the methods I had already been using from some example code I had found on the internet weren&#39;t even there. My alternatives were to try to infer what was going on from the documentation for <a href="http://www.imagemagick.org/Magick++/Documentation.html">Magick++</a>, the C++ API, or to figure it out myself by running</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python">    <span class="kn">import</span> <span class="nn">PythonMagick</span>
-    <span class="nb">dir</span><span class="p">(</span><span class="n">PythonMagick</span><span class="o">.</span><span class="n">Image</span><span class="p">())</span>
-</code></pre></div>
-<p>and seeing what it spat out. I tried this, and there was (Ah-HAH!) a method called antiAlias--but I gave that a shot, and it didn&#39;t seem capable of operating on PDFs being read; my guess it that is meant for use with drawing functions.</p>
+<p>There’s some in the package’s <a href="http://www.imagemagick.org/download/python/README.txt">readme</a>, but it doesn’t seem to be particularly comprehensive; some of the methods I had already been using from some example code I had found on the internet weren’t even there. My alternatives were to try to infer what was going on from the documentation for <a href="http://www.imagemagick.org/Magick++/Documentation.html">Magick++</a>, the C++ API, or to figure it out myself by running</p>
 
-<p>And that&#39;s where I gave up on ImageMagick. I realized I could either keep on trying to hack togther something with it that would inevitably only increase runtime further, or I could go back to the drawing board.</p>
+<p><code>python
+	import PythonMagick
+	dir(PythonMagick.Image())
+</code>
+and seeing what it spat out. I tried this, and there was (Ah-HAH!) a method called antiAlias–but I gave that a shot, and it didn’t seem capable of operating on PDFs being read; my guess it that is meant for use with drawing functions.</p>
+
+<p>And that’s where I gave up on ImageMagick. I realized I could either keep on trying to hack togther something with it that would inevitably only increase runtime further, or I could go back to the drawing board.</p>
 
 <p>I went back to the drawing board. As it turns out, ImageMagick performs its PDF rendering functions with calls to Ghostscript, anyway; I decided to do away with ImageMagick and escape from slow, poorly-documented, impossible-to-install PythonMagick hell by working with Ghostscript directly. Bertan Guven did some <a href="http://bertanguven.com/faster-conversions-from-pdf-to-pngjpeg-imagemagick-vs-ghostscript/">more scientific comparisons of Ghostscript and ImageMagick performance</a>, and his results indicate that Ghostscript is significantly faster.</p>
 
-<p>Ghostscript doesn&#39;t have Python bindings, so I ran it as a subprocess--and, since we need to process the images after they are extracted (and writing each file and then reading it and then writing it again is definitely not the most efficient way to go about things), I redirected the file output to a buffer.</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">getStream</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-        <span class="c">## run ghostscript command as a subprocess and get output</span>
-        <span class="n">pipe</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="s">&quot;gs -dNOPAUSE -sDEVICE=jpeg -sOutputFile=</span><span class="si">%s</span><span class="s">tdout -dJPEGQ=100 -r300 -q &quot;</span><span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s">&quot; -c quit&quot;</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+<p>Ghostscript doesn’t have Python bindings, so I ran it as a subprocess–and, since we need to process the images after they are extracted (and writing each file and then reading it and then writing it again is definitely not the most efficient way to go about things), I redirected the file output to a buffer.</p>
 
-        <span class="nb">bytes</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-        <span class="n">stream</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<p>```python
+	def getStream(filename):
+	    ## run ghostscript command as a subprocess and get output
+	    pipe = subprocess.Popen(“gs -dNOPAUSE -sDEVICE=jpeg -sOutputFile=%stdout -dJPEGQ=100 -r300 -q “+ filename + “ -c quit”, stdout=subprocess.PIPE, shell=True)
+	    out, err = pipe.communicate()</p>
 
-        <span class="k">return</span> <span class="n">stream</span>
-</code></pre></div>
+<pre><code>    bytes = io.BytesIO(out)
+    stream = bytes.read()
+
+    return stream ```
+</code></pre>
+
 <p>I only want to make one call to Ghostscript, but I also have multiple images to extract, so we have to parse the resulting byte stream to separate them, and then decode them using OpenCv.</p>
 
-<p>All JPGs start with <code>b&#39;\xff\xd8&#39;</code> and end with <code>b&#39;\xff\xd9&#39;</code>.</p>
-<div class="highlight"><pre><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">extractImages</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span> 
-        <span class="n">stream</span> <span class="o">=</span> <span class="n">getStream</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<p>All JPGs start with <code>b'\xff\xd8'</code> and end with <code>b'\xff\xd9'</code>.</p>
 
-        <span class="n">imgstart</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">imgend</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<p>```python
+	def extractImages(filename): 
+	    stream = getStream(filename)</p>
 
-        <span class="c">## parse for jpgs</span>
-        <span class="n">decoded_images</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-            <span class="n">next_img_start</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\xff\xd8</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">next_img_start</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">break</span>
-            <span class="n">next_img_end</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\xff\xd9</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">next_img_end</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">break</span>
+<pre><code>    imgstart = 0
+    imgend = 0
+    i = 0
 
-            <span class="c">## get and decode image bytes</span>
-            <span class="n">decoded_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imdecode</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">stream</span><span class="p">[</span><span class="n">next_img_start</span><span class="p">:</span><span class="n">next_img_end</span><span class="o">+</span><span class="mi">2</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_LOAD_IMAGE_COLOR</span><span class="p">)</span>
-            <span class="n">decoded_images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">decoded_image</span><span class="p">)</span>
-            <span class="n">i</span> <span class="o">=</span> <span class="n">next_img_end</span> <span class="o">+</span> <span class="mi">2</span>
-        <span class="k">return</span> <span class="n">decoded_images</span>
-</code></pre></div>
-<p>This returns a list of images, which is exactly what my previous implementation did--only this is significantly faster, and doesn&#39;t rely on PythonMagick. </p>
+    ## parse for jpgs
+    decoded_images = []
+    while True:
+        next_img_start = stream.find(b'\xff\xd8', i)
+        if next_img_start &lt; 0:
+            break
+        next_img_end = stream.find(b'\xff\xd9', i)
+        if next_img_end &lt; 0:
+            break
 
-<p>Here&#39;s a sample result image, rendered at 300 DPI and which ran in a comparable amount of time to our original PythonMagick implementation:</p>
+        ## get and decode image bytes
+        decoded_image = cv2.imdecode(np.fromstring(stream[next_img_start:next_img_end+2], np.uint8), cv2.CV_LOAD_IMAGE_COLOR)
+        decoded_images.append(decoded_image)
+        i = next_img_end + 2
+    return decoded_images ```
+</code></pre>
+
+<p>This returns a list of images, which is exactly what my previous implementation did–only this is significantly faster, and doesn’t rely on PythonMagick. </p>
+
+<p>Here’s a sample result image, rendered at 300 DPI and which ran in a comparable amount of time to our original PythonMagick implementation:</p>
 
 <p align="center">
-<img src="/img/2014-11-19/ghostscriptisawesome.jpg" style="height:500px">
+<img src="/img/2014-11-19/ghostscriptisawesome.jpg" style="height:500px" />
 </p>
 
 <p>I am happy.</p>
 
 <p><em>Next Time:</em> <a href="http://catmores.co/technical/2014/12/15/teaching-my-computer-to-read-skew-detection.html">Skew detection</a>! (For real this time, I promise. Sorry for the digression.)</p>
+
 
   </article>
 
