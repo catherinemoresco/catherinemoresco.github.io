@@ -629,14 +629,14 @@ a.post-link {
 
 /* background image */
 .homepage-background {
-  background: url("/img/happieselfie2.JPG");
+  background: url("/img/ilovestairs.JPG");
   position: relative;
   display: block;
   width: 100vw;
   height: 70vh;
   min-height: 300px;
   background-size: cover;
-  background-position: center; }
+  background-position: top; }
 
 .background-shading {
   z-index: 1;
