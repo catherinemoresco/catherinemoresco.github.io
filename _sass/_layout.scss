@@ -239,6 +239,7 @@ svg{
 
 a.post-link{
     color: black;
+    text-decoration: none;
 }
 
 @mixin calc($property, $expression) { 

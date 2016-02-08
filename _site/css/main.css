@@ -58,20 +58,26 @@ li > ol {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Rubik", sans-serif;
+  font-family: "Cutive Mono", sans-serif;
   font-weight: 700; }
 
 /**
  * Links
  */
 a {
-  color: #E74C3C;
+  color: #000000;
   text-decoration: none; }
   a:visited {
-    color: #E74C3C; }
+    color: #000000; }
   a:hover {
-    color: #E74C3C;
+    color: #000000;
     font-style: italic; }
+
+p a, ul a {
+  text-decoration: underline; }
+
+a.post-link {
+  text-decoration: none; }
 
 /**
  * Blockquotes
@@ -267,7 +273,7 @@ pre {
     .site-header .wrapper .bottom-border {
       z-index: -1;
       margin-top: 5px;
-      border-bottom: solid 2px #E74C3C;
+      border-bottom: solid 2px #000000;
       position: absolute;
       bottom: 0;
       width: -webkit-calc(100% - (30px * 2));
@@ -283,10 +289,10 @@ pre {
   letter-spacing: -1px;
   margin-bottom: 0;
   float: left;
-  font-family: "Rubik", sans-serif;
+  font-family: "Cutive Mono", sans-serif;
   font-weight: 800; }
   .site-title, .site-title:visited {
-    color: #E74C3C; }
+    color: #000000; }
 
 .site-nav {
   float: right;
@@ -294,8 +300,8 @@ pre {
   .site-nav .menu-icon {
     display: none; }
   .site-nav .page-link {
-    font-family: "Rubik", serif;
-    color: #E74C3C;
+    font-family: "Cutive Mono", serif;
+    color: #000000;
     line-height: 1.5; }
     .site-nav .page-link:not(:first-child) {
       margin-left: 20px; }
@@ -335,7 +341,7 @@ pre {
  * Site footer
  */
 svg {
-  fill: #E74C3C; }
+  fill: #000000; }
 
 .site-footer {
   padding: 30px 0; }
@@ -428,7 +434,8 @@ svg {
     font-weight: 500; }
 
 a.post-link {
-  color: black; }
+  color: black;
+  text-decoration: none; }
 
 .white-content-background {
   background: white;
@@ -619,9 +626,9 @@ a.post-link {
   text-align: center;
   font-family: Raleway; }
   .landing-page h1 {
-    color: #E74C3C;
+    color: #000000;
     text-align: center;
-    font-family: "Rubik", serif, sans-serif;
+    font-family: "Cutive Mono", serif, sans-serif;
     font-size: 50px;
     /*text-shadow:0px 0px 2px #000;*/
     margin: 0;
@@ -629,7 +636,7 @@ a.post-link {
 
 /* background image */
 .homepage-background {
-  background: url("/img/ilovestairs.JPG");
+  background: url("/img/ilovestairs.jpg");
   position: relative;
   display: block;
   width: 100vw;
@@ -683,10 +690,10 @@ a.post-link {
     background: white;
     border-radius: 50px;
     padding: 5px 15px 5px 15px;
-    color: #E74C3C; }
+    color: #000000; }
   .homepage-link .page-link:hover {
     text-decoration: none;
-    color: #E74C3C;
+    color: #000000;
     background: #ddd;
     font-style: italic; }
 
@@ -694,10 +701,10 @@ a.post-link {
 .home-footer-container > .site-footer {
   /*background:$accent;*/ }
   .home-footer-container > .site-footer svg {
-    fill: #E74C3C; }
+    fill: #000000; }
   .home-footer-container > .site-footer .footer-icon {
     display: inline-block;
     width: 100px;
     margin: 0; }
   .home-footer-container > .site-footer .copyright {
-    color: #E74C3C; }
+    color: #000000; }
