@@ -126,7 +126,7 @@ doneButton : GameState -> Element
 doneButton gs = 
     if gs.phase /= Drawing then spacer 0 0 else
     (container 900 60 middle) <| flow down [
-            if List.length gs.drawing < 2  || gs.phase/=Drawing then (spacer 0 0 ) else 
+            if List.length gs.drawing < 25 || gs.phase/=Drawing then (spacer 0 0 ) else 
                     Input.button (Signal.message myMailbox.address Done) "DONE"
               ]
 
@@ -245,7 +245,7 @@ upStatePhase act gs =
                     , lastAction = Reset}
         StartOver -> { phase=Drawing
         , pairsVisited=[]
-        , pairsToVisit=[trianglePair, gaussianPair]
+        , pairsToVisit=[trianglePair, gaussianPair, impulsePair, cosPair]
         , currentPair=boxPair
         , drawing=[]
         , totalScore=0 
@@ -439,9 +439,16 @@ check data func =
     --    [] -> 66.3 -- This should never happen, but I don't wannt crash the program so
     --    x::xs -> 100 - (unJustFloat <| List.maximum (List.map2 (\(x, y) z -> abs (x - y)) (List.repeat 11 x) (List.map func [0..10])))
     --else
-    let avgDiff = (List.sum <| List.map (\(x, y) -> abs((func x) - y)) data) / (toFloat <| List.length data) in
-        100 - 100 * (avgDiff/3)
+    --let avgDiff = (rms<| List.map (\(x, y) -> abs((func x) - y)) data) / (toFloat <| List.length data) in
+    --    100 - 100 * (avgDiff/3)
+    crossCorr data func
 
+rms : List Float -> Float
+rms data = sqrt <| (1/ (toFloat <| List.length data)) * ( List.sum <| List.map (\x -> x^2) data )
+
+crossCorr : List (Float, Float) -> Func -> Float 
+crossCorr data func = 
+    Basics.max (100 - 100 * List.sum ((List.map (\(x, y) -> ((func x) - y)^2) data)) / (toFloat <| List.length data)) 0 
 
 unJustFloat : Maybe Float -> Float
 unJustFloat x = 

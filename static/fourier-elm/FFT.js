@@ -12278,15 +12278,20 @@ Elm.FFTDemo.make = function (_elm) {
    };
    var percentToColor = function (x) {    return _U.cmp(x,80) < 0 ? $Color.red : _U.cmp(x,95) < 0 ? $Color.yellow : $Color.green;};
    var unJustFloat = function (x) {    var _p0 = x;if (_p0.ctor === "Nothing") {    return 66.3;} else {    return _p0._0;}};
-   var check = F2(function (data,func) {
-      var avgDiff = $List.sum(A2($List.map,
+   var crossCorr = F2(function (data,func) {
+      return A2($Basics.max,
+      100 - 100 * $List.sum(A2($List.map,
       function (_p1) {
          var _p2 = _p1;
-         return $Basics.abs(func(_p2._0) - _p2._1);
+         return Math.pow(func(_p2._0) - _p2._1,2);
       },
-      data)) / $Basics.toFloat($List.length(data));
-      return 100 - 100 * (avgDiff / 3);
+      data)) / $Basics.toFloat($List.length(data)),
+      0);
    });
+   var rms = function (data) {
+      return $Basics.sqrt(1 / $Basics.toFloat($List.length(data)) * $List.sum(A2($List.map,function (x) {    return Math.pow(x,2);},data)));
+   };
+   var check = F2(function (data,func) {    return A2(crossCorr,data,func);});
    var $const = function (x) {    return 1;};
    var cosTransform = function (x) {    return _U.eq(x,1) || _U.eq(x,-1) ? 1 : 0;};
    var cosPair = {signal: function (x) {
@@ -12294,7 +12299,7 @@ Elm.FFTDemo.make = function (_elm) {
                  }
                  ,transform: cosTransform
                  ,signalEqn: "f(t) = \\cos (t0)$"
-                 ,transformEqn: "$F(f) = \\delta\\delta^+(f0)"
+                 ,transformEqn: "$F(f) = \\delta\\delta^+(f0)$"
                  ,tTitle: "Impulses"
                  ,sTitle: "Cosine"
                  ,sXUnits: "t0"
@@ -12620,7 +12625,7 @@ Elm.FFTDemo.make = function (_elm) {
       $Graphics$Element.middle,
       A2($Graphics$Element.flow,
       $Graphics$Element.down,
-      _U.list([_U.cmp($List.length(gs.drawing),2) < 0 || !_U.eq(gs.phase,Drawing) ? A2($Graphics$Element.spacer,0,0) : A2($Graphics$Input.button,
+      _U.list([_U.cmp($List.length(gs.drawing),25) < 0 || !_U.eq(gs.phase,Drawing) ? A2($Graphics$Element.spacer,0,0) : A2($Graphics$Input.button,
       A2($Signal.message,myMailbox.address,Done),
       "DONE")])));
    };
@@ -12648,7 +12653,7 @@ Elm.FFTDemo.make = function (_elm) {
                case "Reset": return _U.update(gs,{drawing: _U.list([]),lastAction: Reset});
                case "StartOver": return {phase: Drawing
                                         ,pairsVisited: _U.list([])
-                                        ,pairsToVisit: _U.list([trianglePair,gaussianPair])
+                                        ,pairsToVisit: _U.list([trianglePair,gaussianPair,impulsePair,cosPair])
                                         ,currentPair: boxPair
                                         ,drawing: _U.list([])
                                         ,totalScore: 0
@@ -12729,6 +12734,8 @@ Elm.FFTDemo.make = function (_elm) {
                                 ,impulsePair: impulsePair
                                 ,cosPair: cosPair
                                 ,check: check
+                                ,rms: rms
+                                ,crossCorr: crossCorr
                                 ,unJustFloat: unJustFloat
                                 ,percentToColor: percentToColor
                                 ,percentToMessage: percentToMessage};
