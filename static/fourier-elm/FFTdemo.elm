@@ -422,7 +422,7 @@ cosPair = {
     signal =  (\x -> cos (2 * pi * x))
     , transform = cosTransform
     , signalEqn = "f(t) = \\cos (t0)$"
-    , transformEqn = "$F(f) = \\delta\\delta^+(f0)"
+    , transformEqn = "$F(f) = \\delta\\delta^+(f0)$"
     , tTitle = "Impulses"
     , sTitle = "Cosine"
     , sXUnits = "t0"
