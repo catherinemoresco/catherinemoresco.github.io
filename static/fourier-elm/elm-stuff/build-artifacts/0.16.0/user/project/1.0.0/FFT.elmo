@@ -1,0 +1,38 @@
+Elm.FFT = Elm.FFT || {};
+Elm.FFT.make = function (_elm) {
+   "use strict";
+   _elm.FFT = _elm.FFT || {};
+   if (_elm.FFT.values) return _elm.FFT.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Complex = Elm.Complex.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var listGetAt = F2(function (idx,list) {
+      var _p0 = $List.head(A2($List.drop,idx,list));
+      if (_p0.ctor === "Nothing") {
+            return _U.crashCase("FFT",{start: {line: 42,column: 5},end: {line: 44,column: 20}},_p0)("listGetAt called beyond end of list");
+         } else {
+            return _p0._0;
+         }
+   });
+   var dft = function (data) {
+      var foo = F3(function (len,k,xs) {
+         var dataPt = function (n) {    return A2(listGetAt,n,xs);};
+         var twiddle = F3(function (k,n,len) {
+            return A2($Complex.cMul,$Complex.i,A2($Complex.Complex,-2 * $Basics.pi * $Basics.toFloat(k) * $Basics.toFloat(n) / $Basics.toFloat(len),0));
+         });
+         return A3($List.foldl,
+         $Complex.cAdd,
+         A2($Complex.Complex,0,0),
+         A2($List.map,function (n) {    return A2($Debug.log,"",A2($Complex.cMul,$Complex.cExp(A3(twiddle,k,n,len)),dataPt(n)));},_U.range(0,len - 1)));
+      });
+      var length = $List.length(data);
+      return A3($List.map2,foo(length),_U.range(0,length - 1),A2($List.repeat,length,data));
+   };
+   return _elm.FFT.values = {_op: _op,listGetAt: listGetAt,dft: dft};
+};

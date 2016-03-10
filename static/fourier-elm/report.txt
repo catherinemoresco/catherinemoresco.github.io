@@ -1,0 +1,62 @@
+# Report
+#### Catherine Moresco
+
+## Building and Running
+A grading script, make.sh, is included; this will build all of the Elm widgets in the project. You can also run `./make.sh clean` to remove all resuling javascript files from the repository.
+
+Once the widgets are built, you can open Fourier.html and FFTDemo.html to view the projects. Chrome is recommended, mostly because I haven't tested in any other browser. It might work, it might not.
+
+## Project Organization 
+
+The project is divided into two main projects: Fourier.html (an interactive introduction to the Fourier series in HTML/CSS with embedded Elm widgets) and FFTDemo.html (which is an almost-pure interactive guess-the-Fourier-transform game). Each of these html is not compiled directly from Elm, but rather has one or many embedded Elm widgets. The embedded Elm widgets specific to each project are as follows:
+
+#### Fourier.html: 
+- GraphDemo.elm 
+- SquareWave.elm 
+- FourierSeries.elm 
+- ImpulseDemo.elm 
+- SquareFreq.elm 
+
+
+#### FFTDemo.html:
+- FFTDemo.elm 
+
+Both projects also depend on:
+- Graphing.elm, the graphing library which all widgets are built upon
+- Fourier.css for styles
+- assets in `/assets` and `equations`
+
+Not used in either project, but also included, is FFT.elm, which has a DFT (not, ironically, an FFT) implementation in Elm, which depends on Complex.elm (by TheSeamau5 on GitHub, https://github.com/TheSeamau5/Complex/blob/master/Complex.elm), which is also included. These are not part of any of the widgets, but thought you might like to take a look at it to get a sense of some of the long, winding paths I traveled down before arriving at my final project.
+
+## Project Summary
+
+My project has gone though an evolution, as many do. My initial motivation was to try to build some data/algorithm visualizations, as I had previously used D3.js in the creation of such visualizations and was wonderinf if Elm might be adapted to undertake a similar task. I began by creating a small plotting library (Graphing.elm, built on elm-svg; it is still lacking in documentation and functionality, but I think that after I polish it a bit and build out some more basic features, I'll make it public it as an independent Elm module). 
+
+I started by exploring the ways in which Elm could be used not as a complete application, but as embedded widgets in a larget HTML document. I did this for a few reasons 
+- This mimics the format of small embedded data visualizations that I wanted to emulate
+- My larger structure was a simple website/article walkthrough, which is neither complex nor interactive and could be coded very quickly in HTML/CSS; there was little marginal benefit to using Elm for layout here.
+- I was using CSS styles, which require Elm be embedded in HTML to allow linking of the stylesheet.
+
+Fourier.html, and the two inteactive embedded widgets there, are the product of this process. They are simple graphs that allow for user interaction. Throughout the whole arc of both projects, I explore increasingly complex modes of interaction with the grpahs produced by Graphing.elm; in the first, I use a simple slider input, while in the second I experiment with mouse position signals and translating that into position that can be translated into manipulation of the graph. Graphing.elm itself does not enable interaction; all interaction with the graphs in the widgets is done by passing the widget state to the `graph` functions.
+
+Then I started exploring the feasbility of actually calclating at Fourier transform in Elm; it would be pretty neat, I thought, to do some sort of life FT of a signal, audio or 1D or 2D or otherwise. I did implement a DFT in elm (which is in FFT.elm...I never really got around to the FFT). However, I eventually came to the conclusion that--while I wouldn't go so far as to call such a thing "infeasible" or "impossible", it certainly wouldn't be easy and would probably be slow. Javascript--and, therefore, Elm--just isn't build for large-scale numerical computing, and unforunately the FFT really only becomes interesting at a fairly large scale. 
+
+At this point I began to feel frustrated, and like I was working against the language, rather than with it; I was muddling through details of FFT implementation, and not getting to explore any of the FRP in Signals and Mailboxes and working with interop and all that other stuff that Elm is really about. So, I quit the FFT, and instead created an FFT-related game that does make use of all those elements, and uses hard-coded continuous signals instead of attempting to perform efficient DSP on large discrete datasets--because, I concluded, to do such a thing would just be silly.
+
+I ended up with "So you think you know Fourier Transforms?", a game that is neither addicting, nor probably fun for anyone without knowledge of Fourier transforms--it's a good thing I put together that tutorial!
+
+In the game, there are two graphs; one displays a frequency-domain representation of a signal, and the other a blank coordinate axis for the user to draw what they think that the corresponding signal looks like. The differences between the signals is calculated and recorded, and that's the score.
+
+Significant challenges included converting mouse position to the coordinate system that could be passed to the `graph` function (it's just a lot of linear interpolation, really, but it got tricky).
+
+Another challenge--and the one with greatest room, I think, for improvement--is the function that determines score. Right now, the "function" that is the user input is really just a set of points samples from the Mouse.position signal; therefore, the spacing of points at which we check correlation of this function with the proper signal are not evenly spaced, and it's often possible to do quite well just by placing a few points at y=0. I would fix this by interpolating between user points, and using uniformly spaced samples--however, that would take a good while, I am tired, and I think that even without this feature the game is still playable (enjoyable, even?) and a solid proof of concept.
+
+There is also some interop going on--the math is being rendered with MathJax. This causes a little flickering at the moment when the latex-formatted string is converted to the typeset version; I could fix this by hiding the equation until it is properly loaded, but to be honest I kinda like it and want to keep the flickering there as a stylistic choice. 
+
+
+## Reflections
+
+I had some grand ambitions at the start of the project, and what I eneded up with was not at all what I had expected, but I'm proud of what I did--it looks nice, it works, and I think I got a deeper understanding of what Elm is really about. I'm definitely happy I abandoned the more numerical/computational route in favor of the more Elm-y web app; I think that it was kind of silly of me, actually, to deliberately undertake a project that was so difficult with respect to the language being used. Certain languages do certain things very well, and for Elm that thing is interactive front-end stuff, not numerical methods. Oops! I am, however, still proud of my plotting library (though it needs cleaning up), and I've learned a lot throughout this whole process. It's been a journey. And my game, if nerdy and frustrating, is at least reliable and looks nice.
+
+
+
