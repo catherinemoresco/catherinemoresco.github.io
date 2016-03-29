@@ -1,0 +1,87 @@
+Elm.Complex = Elm.Complex || {};
+Elm.Complex.make = function (_elm) {
+   "use strict";
+   _elm.Complex = _elm.Complex || {};
+   if (_elm.Complex.values) return _elm.Complex.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var toTuple = function (z) {    return {ctor: "_Tuple2",_0: z.real,_1: z.imaginary};};
+   var cArg = function (z) {    return A2($Basics.atan2,z.imaginary,z.real);};
+   var cAbs = function (z) {    var b = z.imaginary;var a = z.real;return $Basics.sqrt(a * a + b * b);};
+   var toPolar = function (z) {    return {ctor: "_Tuple2",_0: cAbs(z),_1: cArg(z)};};
+   var Complex = F2(function (a,b) {    return {real: a,imaginary: b};});
+   var cAdd = F2(function (z,w) {    return A2(Complex,z.real + w.real,z.imaginary + w.imaginary);});
+   var cSub = F2(function (z,w) {    return A2(Complex,z.real - w.real,z.imaginary - w.imaginary);});
+   var cNeg = function (z) {    return A2(Complex,0 - z.real,0 - z.imaginary);};
+   var cMul = F2(function (z,w) {    var d = w.imaginary;var c = w.real;var b = z.imaginary;var a = z.real;return A2(Complex,a * c - b * d,b * c + a * d);});
+   var cScaleBy = F2(function (n,z) {    return A2(Complex,z.real * n,z.imaginary * n);});
+   var cDiv = F2(function (z,w) {
+      var d = w.imaginary;
+      var c = w.real;
+      var denom = c * c + d * d;
+      var b = z.imaginary;
+      var a = z.real;
+      return A2(Complex,(a * c + b * d) / denom,(b * c - a * d) / denom);
+   });
+   var conjugate = function (z) {    return A2(Complex,z.real,0 - z.imaginary);};
+   var cSqrt = function (z) {
+      var b = z.imaginary;
+      var a = z.real;
+      var c = $Basics.sqrt((a + $Basics.sqrt(a * a + b * b)) / 2);
+      var signum = function (x) {    return _U.eq(x,0) ? 0 : _U.cmp(x,0) < 0 ? -1 : 1;};
+      var d = signum(b) * $Basics.sqrt((0 - a + $Basics.sqrt(a * a + b * b)) / 2);
+      return A2(Complex,c,d);
+   };
+   var cLn = function (z) {    return A2(Complex,A2($Basics.logBase,$Basics.e,cAbs(z)),cArg(z));};
+   var cExp = function (z) {
+      var b = z.imaginary;
+      var a = z.real;
+      return A2(Complex,Math.pow($Basics.e,a) * $Basics.cos(b),Math.pow($Basics.e,a) * $Basics.sin(b));
+   };
+   var cPow = F2(function (base,exponent) {    return cExp(A2(cMul,exponent,cLn(base)));});
+   var toComplex = function (x) {    return A2(Complex,x,0);};
+   var toImaginary = function (x) {    return A2(Complex,0,x);};
+   var fromTuple = function (_p0) {    var _p1 = _p0;return A2(Complex,_p1._0,_p1._1);};
+   var i = A2(Complex,0,1);
+   var cSin = function (z) {    var iz = A2(cMul,i,z);var niz = cNeg(iz);return A2(cDiv,A2(cSub,cExp(iz),cExp(niz)),A2(cScaleBy,2,i));};
+   var cCsc = function (z) {    return A2(cDiv,toComplex(1),cSin(z));};
+   var cCos = function (z) {    var iz = A2(cMul,i,z);var niz = cNeg(iz);return A2(cScaleBy,0.5,A2(cAdd,cExp(iz),cExp(niz)));};
+   var cTan = function (z) {    return A2(cDiv,cSin(z),cCos(z));};
+   var cCot = function (z) {    return A2(cDiv,toComplex(1),cTan(z));};
+   var cSec = function (z) {    return A2(cDiv,toComplex(1),cCos(z));};
+   var j = i;
+   return _elm.Complex.values = {_op: _op
+                                ,Complex: Complex
+                                ,cAdd: cAdd
+                                ,cSub: cSub
+                                ,cNeg: cNeg
+                                ,cMul: cMul
+                                ,cScaleBy: cScaleBy
+                                ,cDiv: cDiv
+                                ,conjugate: conjugate
+                                ,cAbs: cAbs
+                                ,cArg: cArg
+                                ,cSqrt: cSqrt
+                                ,cLn: cLn
+                                ,cExp: cExp
+                                ,cPow: cPow
+                                ,cSin: cSin
+                                ,cCos: cCos
+                                ,cTan: cTan
+                                ,cSec: cSec
+                                ,cCsc: cCsc
+                                ,cCot: cCot
+                                ,toComplex: toComplex
+                                ,toImaginary: toImaginary
+                                ,fromTuple: fromTuple
+                                ,toTuple: toTuple
+                                ,toPolar: toPolar
+                                ,i: i
+                                ,j: j};
+};

@@ -1,0 +1,162 @@
+Elm.ImpulseDemo = Elm.ImpulseDemo || {};
+Elm.ImpulseDemo.make = function (_elm) {
+   "use strict";
+   _elm.ImpulseDemo = _elm.ImpulseDemo || {};
+   if (_elm.ImpulseDemo.values) return _elm.ImpulseDemo.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Graphing = Elm.Graphing.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Mouse = Elm.Mouse.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var combine = function (l) {
+      return A3($List.foldr,$Signal.map2(F2(function (x,y) {    return A2($Basics._op["++"],_U.list([x]),y);})),$Signal.constant(_U.list([])),l);
+   };
+   var addFunc = F3(function (x,y,z) {    return x(z) + y(z);});
+   var lerp = F5(function (x0,x,x1,y0,y1) {    return y0 + (y1 - y0) * ((x - x0) / (x1 - x0));});
+   var graphStyleSin = _U.update($Graphing.defaultGraph,
+   {width: 800,height: 200,yInterval: {ctor: "_Tuple2",_0: -10,_1: 10},xInterval: {ctor: "_Tuple2",_0: 0,_1: 4},margin: 25,axisColor: "#000",yTicksEvery: 10});
+   var graphStyle = _U.update($Graphing.defaultGraph,
+   {width: 800
+   ,height: 200
+   ,yInterval: {ctor: "_Tuple2",_0: 0,_1: 4 / $Basics.pi * 1.5}
+   ,xInterval: {ctor: "_Tuple2",_0: 0,_1: 20}
+   ,margin: 25
+   ,axisColor: "#000"
+   ,xTicksEvery: 1});
+   var getYValue = F2(function (_p0,ga) {
+      var _p1 = _p0;
+      var _p3 = _p1._1;
+      var _p2 = ga.yInterval;
+      var ymin = _p2._0;
+      var ymax = _p2._1;
+      var height = $Basics.toFloat(ga.height);
+      var width = $Basics.toFloat(ga.width);
+      var margin = $Basics.toFloat(ga.margin);
+      return _U.cmp(_p3,margin) < 0 ? $Maybe.Nothing : _U.cmp(_p3,height + margin) > 0 ? $Maybe.Nothing : $Maybe.Just(A5(lerp,
+      height + margin,
+      _p3,
+      margin,
+      ymin,
+      ymax));
+   });
+   var maybeMouse = A3($Signal.map2,
+   F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),
+   $Mouse.isDown,
+   A2($Signal.map,function (_p4) {    var _p5 = _p4;return {ctor: "_Tuple2",_0: $Basics.toFloat(_p5._0),_1: $Basics.toFloat(_p5._1)};},$Mouse.position));
+   var filterNothing = function (_p6) {
+      var _p7 = _p6;
+      var _p8 = _p7._0;
+      if (_p8 === true) {
+            return $Maybe.Just(_p7._1);
+         } else {
+            return $Maybe.Nothing;
+         }
+   };
+   var dataList = $List.concat(A3($List.map2,
+   F2(function (x,y) {    return _U.list([x,y]);}),
+   A2($List.map,
+   function (x) {
+      return {ctor: "_Tuple2",_0: x,_1: $Basics.abs(4 / $Basics.pi / x)};
+   },
+   A2($List.map,function (x) {    return 2 * x - 1;},_U.range(1,10))),
+   A2($List.map,function (x) {    return {ctor: "_Tuple2",_0: x,_1: 0};},A2($List.map,function (x) {    return 2 * x;},_U.range(1,10)))));
+   var getSector = F2(function (_p9,ga) {
+      var _p10 = _p9;
+      var _p13 = _p10._1;
+      var _p12 = _p10._0;
+      var _p11 = A2($Debug.log,"",_p12);
+      var height = $Basics.toFloat(ga.height);
+      var width = $Basics.toFloat(ga.width - 2 * ga.margin);
+      var margin = $Basics.toFloat(ga.margin);
+      if (_U.cmp(_p12,margin) < 0) return $Maybe.Nothing; else if (_U.cmp(_p12,width + margin + 15) > 0) return $Maybe.Nothing; else if (_U.cmp(_p13,
+            margin) < 0) return $Maybe.Nothing; else if (_U.cmp(_p13,height + margin) > 0) return $Maybe.Nothing; else {
+                     var sectorSize = width / $Basics.toFloat($List.length(dataList));
+                     return $Maybe.Just($Basics.floor((_p12 - margin - 15) / sectorSize - 0.5));
+                  }
+   });
+   var updateData = F3(function (ga,mousePos,data) {
+      var foo = F2(function (_p14,data) {
+         var _p15 = _p14;
+         var _p20 = _p15._1;
+         var _p19 = _p15._0;
+         var _p16 = data;
+         if (_p16.ctor === "[]") {
+               return _U.list([]);
+            } else {
+               var _p18 = _p16._1;
+               var _p17 = _p16._0;
+               return _U.eq(_p19,0) ? A2($List._op["::"],{ctor: "_Tuple2",_0: $Basics.fst(_p17),_1: _p20},_p18) : A2($List._op["::"],
+               _p17,
+               A2(foo,{ctor: "_Tuple2",_0: _p19 - 1,_1: _p20},_p18));
+            }
+      });
+      var _p21 = {ctor: "_Tuple2",_0: A2(getSector,mousePos,ga),_1: A2(getYValue,mousePos,ga)};
+      if (_p21._0.ctor === "Nothing") {
+            return data;
+         } else {
+            if (_p21._1.ctor === "Nothing") {
+                  return data;
+               } else {
+                  return A2(foo,{ctor: "_Tuple2",_0: _p21._0._0,_1: _p21._1._0},data);
+               }
+         }
+   });
+   var mouseCoordData = A3($Signal.foldp,updateData(graphStyle),dataList,A3($Signal.filterMap,filterNothing,{ctor: "_Tuple2",_0: -1,_1: -1},maybeMouse));
+   var $function = A2($Signal.map,
+   $Graphing.wrapFunc,
+   function () {
+      var sinFromFreqSpace = F2(function (_p22,z) {    var _p23 = _p22;return _p23._1 * $Basics.sin(_p23._0 * $Basics.pi * z);});
+      return A2($Signal.map,A2($List.foldr,addFunc,function (_p24) {    return 0;}),A2($Signal.map,$List.map(sinFromFreqSpace),mouseCoordData));
+   }());
+   var sinusoid = A2($Signal.map,
+   $Html.div(_U.list([$Html$Attributes.$class("white shadow")])),
+   combine(_U.list([$Signal.constant(A2($Html.div,_U.list([$Html$Attributes.$class("spacer")]),_U.list([])))
+                   ,$Signal.constant(A2($Html.div,_U.list([$Html$Attributes.$class("centered header-font")]),_U.list([$Html.text("Sinusoidal Signal")])))
+                   ,A2($Signal.map,
+                   function (x) {
+                      return A2($Graphing.graph,_U.list([{ctor: "_Tuple2",_0: x,_1: _U.update($Graphing.defaultPlot,{strokeColor: "#ee2560"})}]),graphStyleSin);
+                   },
+                   $function)])));
+   var data = A2($Signal.map,$Graphing.wrapData,mouseCoordData);
+   var freq = A2($Signal.map,
+   $Html.div(_U.list([$Html$Attributes.$class("white shadow")])),
+   combine(_U.list([$Signal.constant(A2($Html.div,_U.list([$Html$Attributes.$class("spacer")]),_U.list([])))
+                   ,$Signal.constant(A2($Html.div,
+                   _U.list([$Html$Attributes.$class("centered header-font")]),
+                   _U.list([$Html.text("Frequency Domain Representation")])))
+                   ,A2($Signal.map,
+                   function (x) {
+                      return A2($Graphing.graph,
+                      _U.list([{ctor: "_Tuple2",_0: x,_1: _U.update($Graphing.defaultPlot,{strokeColor: "#999",dotColor: "#ee2560"})}]),
+                      graphStyle);
+                   },
+                   data)])));
+   var main = A2($Signal.map,
+   $Html.div(_U.list([])),
+   combine(_U.list([freq,$Signal.constant(A2($Html.div,_U.list([$Html$Attributes.$class("spacer")]),_U.list([]))),sinusoid])));
+   return _elm.ImpulseDemo.values = {_op: _op
+                                    ,data: data
+                                    ,$function: $function
+                                    ,dataList: dataList
+                                    ,mouseCoordData: mouseCoordData
+                                    ,filterNothing: filterNothing
+                                    ,maybeMouse: maybeMouse
+                                    ,getSector: getSector
+                                    ,getYValue: getYValue
+                                    ,updateData: updateData
+                                    ,graphStyle: graphStyle
+                                    ,graphStyleSin: graphStyleSin
+                                    ,main: main
+                                    ,freq: freq
+                                    ,sinusoid: sinusoid
+                                    ,lerp: lerp
+                                    ,addFunc: addFunc
+                                    ,combine: combine};
+};

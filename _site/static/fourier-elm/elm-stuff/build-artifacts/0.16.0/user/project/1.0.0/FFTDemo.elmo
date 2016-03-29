@@ -1,0 +1,492 @@
+Elm.FFTDemo = Elm.FFTDemo || {};
+Elm.FFTDemo.make = function (_elm) {
+   "use strict";
+   _elm.FFTDemo = _elm.FFTDemo || {};
+   if (_elm.FFTDemo.values) return _elm.FFTDemo.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Color = Elm.Color.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Graphics$Element = Elm.Graphics.Element.make(_elm),
+   $Graphics$Input = Elm.Graphics.Input.make(_elm),
+   $Graphing = Elm.Graphing.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Mouse = Elm.Mouse.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Signal$Extra = Elm.Signal.Extra.make(_elm),
+   $String = Elm.String.make(_elm),
+   $Text = Elm.Text.make(_elm),
+   $Time = Elm.Time.make(_elm);
+   var _op = {};
+   var refreshMathJax = Elm.Native.Port.make(_elm).outboundSignal("refreshMathJax",function (v) {    return v;},$Time.fps(60));
+   var percentToMessage = function (x) {
+      return _U.cmp(x,70) < 0 ? "Are you even trying?" : _U.cmp(x,85) < 0 ? "Well, at least you tried." : _U.cmp(x,95) < 0 ? "Nice." : "Holy cow!";
+   };
+   var percentToColor = function (x) {    return _U.cmp(x,80) < 0 ? $Color.red : _U.cmp(x,95) < 0 ? $Color.yellow : $Color.green;};
+   var unJustFloat = function (x) {    var _p0 = x;if (_p0.ctor === "Nothing") {    return 66.3;} else {    return _p0._0;}};
+   var crossCorr = F2(function (data,func) {
+      return A2($Basics.max,
+      100 - 100 * $List.sum(A2($List.map,
+      function (_p1) {
+         var _p2 = _p1;
+         return Math.pow(func(_p2._0) - _p2._1,2);
+      },
+      data)) / $Basics.toFloat($List.length(data)),
+      0);
+   });
+   var rms = function (data) {
+      return $Basics.sqrt(1 / $Basics.toFloat($List.length(data)) * $List.sum(A2($List.map,function (x) {    return Math.pow(x,2);},data)));
+   };
+   var check = F2(function (data,func) {    return A2(crossCorr,data,func);});
+   var $const = function (x) {    return 1;};
+   var cosTransform = function (x) {    return _U.eq(x,1) || _U.eq(x,-1) ? 1 : 0;};
+   var cosPair = {signal: function (x) {
+                    return $Basics.cos(2 * $Basics.pi * x);
+                 }
+                 ,transform: cosTransform
+                 ,signalEqn: "f(t) = \\cos (t0)$"
+                 ,transformEqn: "$F(f) = \\delta\\delta^+(f0)$"
+                 ,tTitle: "Impulses"
+                 ,sTitle: "Cosine"
+                 ,sXUnits: "t0"
+                 ,tXUnits: "f0"};
+   var gaussianTransform = function (x) {    return Math.pow($Basics.e,-1 * Math.pow(x,2) * 1 / 2);};
+   var gaussian = function (x) {    return Math.pow($Basics.e,-1 * Math.pow(x,2) * 1 / 2);};
+   var gaussianPair = {signal: gaussian
+                      ,transform: gaussianTransform
+                      ,signalEqn: "$f(t) = e^{-\\frac{1}{2}t^2} $"
+                      ,transformEqn: "$F(f) = \\tau (2 \\pi )^{\\frac{1}{2}} e^{-\\frac{1}{2}t^2}$"
+                      ,tTitle: "Gaussian"
+                      ,sTitle: "Gaussian"
+                      ,sXUnits: "T"
+                      ,tXUnits: "/T"};
+   var triangle = function (x) {    return _U.cmp($Basics.abs(x),1) < 0 ? 1 - $Basics.abs(x) : 0;};
+   var sinc2 = function (x) {    return _U.eq(x,0) ? 1 : Math.pow(1 / ($Basics.pi * x) * $Basics.sin($Basics.pi * x),2);};
+   var trianglePair = {signal: triangle
+                      ,transform: sinc2
+                      ,signalEqn: "$f(t) = \\begin{cases}\n        1 - |t|/\\tau, & |t| < \\tau \\\\\n        0, & |t| > \\tau\n        \\end{cases} $"
+                      ,transformEqn: "$F(f) = \\tau \\text{sinc}^2 (f \\tau)$"
+                      ,tTitle: "Squared sinc"
+                      ,sTitle: "Triangle"
+                      ,sXUnits: "T"
+                      ,tXUnits: "/T"};
+   var sinc = function (x) {    return _U.eq(x,0) ? 1 : 1 / ($Basics.pi * x) * $Basics.sin($Basics.pi * x);};
+   var box = function (x) {    return _U.cmp(x,-1 / 2.0) > 0 && _U.cmp(x,1 / 2.0) < 0 ? 1 : 0;};
+   var boxPair = {signal: box
+                 ,transform: sinc
+                 ,signalEqn: "$f(t) = \\begin{cases}\n        1, & |t| < \\tau/2 \\\\\n        0, & |t| > \\tau/2  \n        \\end{cases} $"
+                 ,transformEqn: "$F(f) = \\tau \\text{sinc} (f \\tau)$"
+                 ,tTitle: "Sinc"
+                 ,sTitle: "Box"
+                 ,sXUnits: "T"
+                 ,tXUnits: "/T"};
+   var maybeMouse = A3($Signal.map2,
+   F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),
+   $Mouse.isDown,
+   A2($Signal.map,function (_p3) {    var _p4 = _p3;return {ctor: "_Tuple2",_0: $Basics.toFloat(_p4._0),_1: $Basics.toFloat(_p4._1)};},$Mouse.position));
+   var filterNothing = function (_p5) {
+      var _p6 = _p5;
+      var _p7 = _p6._0;
+      if (_p7 === true) {
+            return $Maybe.Just(_p6._1);
+         } else {
+            return $Maybe.Nothing;
+         }
+   };
+   var lerp = F5(function (x0,x,x1,y0,y1) {    return y0 + (y1 - y0) * ((x - x0) / (x1 - x0));});
+   var convertCoords = F5(function (_p12,_p11,_p10,_p9,_p8) {
+      var _p13 = _p12;
+      var _p14 = _p11;
+      var _p15 = _p10;
+      var _p16 = _p9;
+      var _p17 = _p8;
+      return {ctor: "_Tuple2",_0: A5(lerp,_p13._0,_p17._0,_p13._1,_p15._0,_p15._1),_1: A5(lerp,_p14._1,_p17._1,_p14._0,_p16._0,_p16._1)};
+   });
+   var scoreLine = F2(function (idx,_p18) {
+      var _p19 = _p18;
+      var _p20 = _p19._1;
+      var color = _U.eq(idx,0) ? $Color.darkGray : $Color.gray;
+      return A2($Graphics$Element.flow,
+      $Graphics$Element.right,
+      _U.list([A4($Graphics$Element.container,
+              200,
+              19,
+              $Graphics$Element.midLeft,
+              $Graphics$Element.leftAligned(A2($Text.color,color,$Text.fromString($String.concat(_U.list([_p20.sTitle," &rarr; ",_p20.tTitle]))))))
+              ,$Graphics$Element.rightAligned(A2($Text.color,
+              color,
+              $Text.fromString($String.concat(_U.list([A2($String.left,4,$Basics.toString(_p19._0)),"%"])))))]));
+   });
+   var scoreDisplay = function (gs) {
+      return A2($Graphics$Element.flow,
+      $Graphics$Element.right,
+      _U.list([A2($Graphics$Element.spacer,30,30)
+              ,A2($Graphics$Element.flow,
+              $Graphics$Element.down,
+              A2($List.append,
+              _U.list([A2($Graphics$Element.flow,
+              $Graphics$Element.right,
+              _U.list([A2($Graphics$Element.width,200,$Graphics$Element.leftAligned($Text.fromString("Average Score: ")))
+                      ,$Graphics$Element.rightAligned(A2($Text.color,
+                      percentToColor(gs.totalScore),
+                      $Text.fromString($String.concat(_U.list([A2($String.left,4,$Basics.toString(gs.totalScore)),"%"])))))]))]),
+              A2($List.indexedMap,scoreLine,A3($List.map2,F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),gs.scores,gs.pairsVisited))))]));
+   };
+   var header = A2($Graphics$Element.flow,
+   $Graphics$Element.down,
+   _U.list([A2($Graphics$Element.spacer,30,30)
+           ,A2($Graphics$Element.flow,
+           $Graphics$Element.right,
+           _U.list([A2($Graphics$Element.spacer,30,30)
+                   ,A2($Graphics$Element.width,
+                   800,
+                   $Graphics$Element.leftAligned(A2($Text.height,
+                   30,
+                   A2($Text.typeface,_U.list(["Patua One","sans-serif"]),$Text.fromString("So you think you know ")))))]))
+           ,A2($Graphics$Element.width,
+           800,
+           $Graphics$Element.centered(A2($Text.height,45,A2($Text.typeface,_U.list(["Patua One","sans-serif"]),$Text.fromString("Fourier Transforms?")))))
+           ,A2($Graphics$Element.flow,
+           $Graphics$Element.right,
+           _U.list([A2($Graphics$Element.spacer,30,30)
+                   ,A2($Graphics$Element.width,
+                   800,
+                   $Graphics$Element.leftAligned(A2($Text.color,
+                   $Color.darkGray,
+                   A2($Text.height,
+                   14,
+                   A2($Text.typeface,
+                   _U.list(["Lato","sans-serif"]),
+                   $Text.fromString("Click and drag to draw the signal corresponding to the given frequency-domain representation."))))))]))
+           ,A2($Graphics$Element.spacer,45,45)
+           ,A2($Graphics$Element.spacer,15,15)]));
+   var plotStyle = _U.update($Graphing.defaultPlot,{plotType: $Graphing.plotType("line"),strokeColor: "#ee2560"});
+   var graphStyle = _U.update($Graphing.defaultGraph,
+   {width: 400,height: 300,xInterval: {ctor: "_Tuple2",_0: -5,_1: 5},yInterval: {ctor: "_Tuple2",_0: -1,_1: 2},xTicksEvery: 2});
+   var graphs = function (gs) {
+      var _p21 = gs.phase;
+      if (_p21.ctor === "GameOver") {
+            return A2($Graphics$Element.spacer,10,10);
+         } else {
+            var _p22 = function () {
+               var _p23 = gs.phase;
+               if (_p23.ctor === "Drawing") {
+                     return {ctor: "_Tuple3",_0: $Graphing.wrapData(_U.list([])),_1: "$?$",_2: ""};
+                  } else {
+                     return {ctor: "_Tuple3",_0: $Graphing.wrapFunc(gs.currentPair.signal),_1: gs.currentPair.signalEqn,_2: gs.currentPair.sTitle};
+                  }
+            }();
+            var shownSig = _p22._0;
+            var shownEq = _p22._1;
+            var shownTitle = _p22._2;
+            return A3($Html.toElement,
+            950,
+            440,
+            A2($Html.div,
+            _U.list([$Html$Attributes.$class("gray shadow")]),
+            _U.list([$Html.fromElement(A2($Graphics$Element.flow,
+            $Graphics$Element.right,
+            _U.list([A2($Graphics$Element.spacer,30,30)
+                    ,A2($Graphics$Element.flow,
+                    $Graphics$Element.down,
+                    _U.list([A2($Graphics$Element.flow,
+                            $Graphics$Element.right,
+                            _U.list([A2($Graphics$Element.spacer,0,115)
+                                    ,A2($Graphics$Element.flow,
+                                    $Graphics$Element.down,
+                                    _U.list([A4($Graphics$Element.container,
+                                            400,
+                                            25,
+                                            $Graphics$Element.midBottom,
+                                            $Graphics$Element.centered(A2($Text.typeface,_U.list(["Patua One","serif"]),$Text.fromString(shownTitle))))
+                                            ,A2($Graphics$Element.spacer,15,15)
+                                            ,A4($Graphics$Element.container,
+                                            400,
+                                            80,
+                                            $Graphics$Element.middle,
+                                            $Graphics$Element.centered(A2($Text.height,12,$Text.fromString(shownEq))))]))]))
+                            ,A3($Html.toElement,
+                            400,
+                            300,
+                            A2($Graphing.graph,
+                            _U.list([{ctor: "_Tuple2",_0: shownSig,_1: $Graphing.defaultPlot}
+                                    ,{ctor: "_Tuple2",_0: $Graphing.wrapData(gs.drawing),_1: plotStyle}]),
+                            _U.update(graphStyle,{xUnits: gs.currentPair.sXUnits})))
+                            ,A2($Graphics$Element.spacer,15,15)]))
+                    ,A2($Graphics$Element.flow,
+                    $Graphics$Element.down,
+                    _U.list([A2($Graphics$Element.spacer,50,230),$Graphics$Element.centered(A2($Text.height,30,$Text.fromString("&rarr;")))]))
+                    ,A2($Graphics$Element.flow,
+                    $Graphics$Element.down,
+                    _U.list([A2($Graphics$Element.flow,
+                            $Graphics$Element.right,
+                            _U.list([A2($Graphics$Element.spacer,0,115)
+                                    ,A2($Graphics$Element.flow,
+                                    $Graphics$Element.down,
+                                    _U.list([A4($Graphics$Element.container,
+                                            400,
+                                            25,
+                                            $Graphics$Element.midBottom,
+                                            $Graphics$Element.centered(A2($Text.typeface,
+                                            _U.list(["Patua One","serif"]),
+                                            $Text.fromString(gs.currentPair.tTitle))))
+                                            ,A2($Graphics$Element.spacer,15,15)
+                                            ,A4($Graphics$Element.container,
+                                            400,
+                                            80,
+                                            $Graphics$Element.middle,
+                                            $Graphics$Element.centered(A2($Text.height,12,$Text.fromString(gs.currentPair.transformEqn))))]))]))
+                            ,A3($Html.toElement,
+                            400,
+                            300,
+                            A2($Graphing.graph,
+                            _U.list([{ctor: "_Tuple2",_0: $Graphing.wrapFunc(gs.currentPair.transform),_1: $Graphing.defaultPlot}]),
+                            _U.update(graphStyle,{xUnits: gs.currentPair.tXUnits})))]))])))])));
+         }
+   };
+   var impulse = function (x) {    return _U.eq(x,0) ? $Basics.snd(graphStyle.yInterval) : 0;};
+   var impulsePair = {signal: impulse
+                     ,transform: $const
+                     ,signalEqn: "$f(t) = \\delta(t) $"
+                     ,transformEqn: "$F(f) = 1$"
+                     ,tTitle: "Constant"
+                     ,sTitle: "Impulse"
+                     ,sXUnits: "T"
+                     ,tXUnits: "/T"};
+   var impulseTrain = function (x) {    return _U.cmp($Basics.abs(x - $Basics.toFloat($Basics.round(x))),1.0e-2) < 0 ? $Basics.snd(graphStyle.yInterval) : 0;};
+   var topMargin = 35 + 30 + 15 + 40 + 45 + 10 + 75 + 35 + 28 + 15;
+   var isMouseInDrawSpace = function (_p24) {
+      var _p25 = _p24;
+      var _p27 = _p25._1;
+      var _p26 = _p25._0;
+      return _U.cmp(_p26,30) > 0 && (_U.cmp(_p26,430) < 0 && (_U.cmp(_p27,0 + topMargin) > 0 && _U.cmp(_p27,300 + topMargin) < 0)) ? true : false;
+   };
+   var mouseCoordData = A3($Signal.filter,
+   isMouseInDrawSpace,
+   {ctor: "_Tuple2",_0: 0,_1: 0},
+   A3($Signal.filterMap,filterNothing,{ctor: "_Tuple2",_0: -1,_1: -1},maybeMouse));
+   var mousePosInSignalFrame = A2($Signal.map,
+   function (x) {
+      return A5(convertCoords,
+      {ctor: "_Tuple2",_0: 55,_1: 400},
+      {ctor: "_Tuple2",_0: 25 + topMargin,_1: 275 + topMargin},
+      graphStyle.xInterval,
+      graphStyle.yInterval,
+      x);
+   },
+   mouseCoordData);
+   var GameState = F8(function (a,b,c,d,e,f,g,h) {
+      return {phase: a,pairsVisited: b,pairsToVisit: c,currentPair: d,drawing: e,totalScore: f,scores: g,lastAction: h};
+   });
+   var Pair = F8(function (a,b,c,d,e,f,g,h) {    return {signal: a,transform: b,signalEqn: c,transformEqn: d,tTitle: e,sTitle: f,sXUnits: g,tXUnits: h};});
+   var GameOver = {ctor: "GameOver"};
+   var Result = {ctor: "Result"};
+   var upstateDrawing = F2(function (coord,state) {
+      if (_U.eq(state.phase,Result) || _U.eq(state.phase,GameOver)) return state; else {
+            var _p28 = state.drawing;
+            if (_p28.ctor === "::") {
+                  return _U.eq(coord,_p28._0) ? state : _U.update(state,{drawing: A2($List._op["::"],coord,state.drawing)});
+               } else {
+                  return _U.update(state,{drawing: A2($List._op["::"],coord,state.drawing)});
+               }
+         }
+   });
+   var Drawing = {ctor: "Drawing"};
+   var NoOp = {ctor: "NoOp"};
+   var state = {phase: Drawing
+               ,pairsVisited: _U.list([])
+               ,pairsToVisit: _U.list([trianglePair,gaussianPair,impulsePair,cosPair])
+               ,currentPair: boxPair
+               ,drawing: _U.list([])
+               ,totalScore: 0
+               ,scores: _U.list([])
+               ,lastAction: NoOp};
+   var myMailbox = $Signal.mailbox(NoOp);
+   var StartOver = {ctor: "StartOver"};
+   var startOver = function (gs) {    return A2($Graphics$Input.button,A2($Signal.message,myMailbox.address,StartOver),"TRY AGAIN");};
+   var resultScore = function (gs) {
+      if (_U.eq(gs.phase,Result)) {
+            var score = function () {    var _p29 = gs.scores;if (_p29.ctor === "[]") {    return 0;} else {    return _p29._0;}}();
+            return A4($Graphics$Element.container,
+            900,
+            60,
+            $Graphics$Element.middle,
+            $Graphics$Element.centered(A2($Text.color,
+            percentToColor(score),
+            A2($Text.typeface,
+            _U.list(["Patua One","serif"]),
+            A2($Text.height,50,$Text.fromString($String.concat(_U.list([A2($String.left,4,$Basics.toString(score)),"%"]))))))));
+         } else if (_U.eq(gs.phase,GameOver)) {
+               var score = gs.totalScore;
+               return A2($Graphics$Element.flow,
+               $Graphics$Element.down,
+               _U.list([A2($Graphics$Element.spacer,25,25)
+                       ,A4($Graphics$Element.container,
+                       950,
+                       150,
+                       $Graphics$Element.middle,
+                       $Graphics$Element.centered(A2($Text.color,
+                       percentToColor(gs.totalScore),
+                       A2($Text.typeface,
+                       _U.list(["Patua One","serif"]),
+                       A2($Text.height,100,$Text.fromString($String.concat(_U.list([A2($String.left,4,$Basics.toString(gs.totalScore)),"%"]))))))))
+                       ,A2($Graphics$Element.spacer,15,15)
+                       ,A4($Graphics$Element.container,
+                       950,
+                       100,
+                       $Graphics$Element.midTop,
+                       $Graphics$Element.centered(A2($Text.color,
+                       $Color.darkGray,
+                       A2($Text.typeface,_U.list(["Lato","sans-serif"]),A2($Text.height,40,$Text.fromString(percentToMessage(gs.totalScore)))))))
+                       ,A4($Graphics$Element.container,950,75,$Graphics$Element.middle,startOver(gs))]));
+            } else return A2($Graphics$Element.spacer,0,0);
+   };
+   var Reset = {ctor: "Reset"};
+   var resetButton = function (gs) {
+      return !_U.eq(gs.phase,Drawing) ? A2($Graphics$Element.spacer,0,0) : A4($Graphics$Element.container,
+      900,
+      60,
+      $Graphics$Element.middle,
+      A2($Graphics$Element.flow,
+      $Graphics$Element.down,
+      _U.list([_U.cmp($List.length(gs.drawing),2) < 0 || !_U.eq(gs.phase,Drawing) ? A2($Graphics$Element.spacer,0,0) : A2($Graphics$Input.button,
+      A2($Signal.message,myMailbox.address,Reset),
+      "RESET")])));
+   };
+   var Next = {ctor: "Next"};
+   var nextButton = function (gs) {
+      return !_U.eq(gs.phase,Result) ? A2($Graphics$Element.spacer,0,0) : A4($Graphics$Element.container,
+      900,
+      60,
+      $Graphics$Element.middle,
+      A2($Graphics$Element.flow,
+      $Graphics$Element.down,
+      _U.list([!_U.eq(gs.phase,Result) ? A2($Graphics$Element.spacer,0,0) : A2($Graphics$Input.button,A2($Signal.message,myMailbox.address,Next),"NEXT")])));
+   };
+   var Done = {ctor: "Done"};
+   var doneButton = function (gs) {
+      return !_U.eq(gs.phase,Drawing) ? A2($Graphics$Element.spacer,0,0) : A4($Graphics$Element.container,
+      900,
+      60,
+      $Graphics$Element.middle,
+      A2($Graphics$Element.flow,
+      $Graphics$Element.down,
+      _U.list([_U.cmp($List.length(gs.drawing),25) < 0 || !_U.eq(gs.phase,Drawing) ? A2($Graphics$Element.spacer,0,0) : A2($Graphics$Input.button,
+      A2($Signal.message,myMailbox.address,Done),
+      "DONE")])));
+   };
+   var upStatePhase = F2(function (act,gs) {
+      if (_U.eq(gs.lastAction,act)) return gs; else {
+            var _p30 = act;
+            switch (_p30.ctor)
+            {case "Done": if (_U.cmp($List.length(gs.drawing),2) < 0) return gs; else if (!_U.eq(gs.phase,Drawing)) return gs; else {
+                          var score = A2(check,gs.drawing,gs.currentPair.signal);
+                          return _U.update(gs,
+                          {phase: Result
+                          ,scores: A2($List._op["::"],score,gs.scores)
+                          ,totalScore: ($Basics.toFloat($List.length(gs.pairsVisited)) * gs.totalScore + score) / $Basics.toFloat($List.length(gs.pairsVisited) + 1)
+                          ,lastAction: Done
+                          ,pairsVisited: A2($List._op["::"],gs.currentPair,gs.pairsVisited)});
+                       }
+               case "Next": if (!_U.eq(gs.phase,Result)) return gs; else {
+                       var _p31 = gs.pairsToVisit;
+                       if (_p31.ctor === "[]") {
+                             return _U.update(gs,{phase: GameOver,drawing: _U.list([])});
+                          } else {
+                             return _U.update(gs,{phase: Drawing,currentPair: _p31._0,pairsToVisit: _p31._1,drawing: _U.list([]),lastAction: Next});
+                          }
+                    }
+               case "Reset": return _U.update(gs,{drawing: _U.list([]),lastAction: Reset});
+               case "StartOver": return {phase: Drawing
+                                        ,pairsVisited: _U.list([])
+                                        ,pairsToVisit: _U.list([trianglePair,gaussianPair,impulsePair,cosPair])
+                                        ,currentPair: boxPair
+                                        ,drawing: _U.list([])
+                                        ,totalScore: 0
+                                        ,scores: _U.list([])
+                                        ,lastAction: StartOver};
+               default: return gs;}
+         }
+   });
+   var upState = F2(function (_p32,gs) {    var _p33 = _p32;return A2(upStatePhase,_p33._1,A2(upstateDrawing,_p33._0,gs));});
+   var main = function () {
+      var stateSignal = A3($Signal.foldp,
+      upState,
+      state,
+      A3($Signal.map2,F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),mousePosInSignalFrame,myMailbox.signal));
+      return A2($Signal.map,
+      $Graphics$Element.flow($Graphics$Element.down),
+      $Signal$Extra.combine(_U.list([$Signal.constant(header)
+                                    ,A2($Signal.map,graphs,stateSignal)
+                                    ,$Signal.constant(A2($Graphics$Element.spacer,15,15))
+                                    ,A2($Signal.map,resultScore,stateSignal)
+                                    ,A2($Signal.map,resetButton,stateSignal)
+                                    ,A2($Signal.map,doneButton,stateSignal)
+                                    ,A2($Signal.map,nextButton,stateSignal)
+                                    ,$Signal.constant(A2($Graphics$Element.spacer,15,15))
+                                    ,A2($Signal.map,
+                                    A3($Graphics$Element.container,900,300,$Graphics$Element.midTop),
+                                    A2($Signal.map,scoreDisplay,stateSignal))])));
+   }();
+   return _elm.FFTDemo.values = {_op: _op
+                                ,Done: Done
+                                ,Next: Next
+                                ,Reset: Reset
+                                ,StartOver: StartOver
+                                ,NoOp: NoOp
+                                ,Drawing: Drawing
+                                ,Result: Result
+                                ,GameOver: GameOver
+                                ,Pair: Pair
+                                ,GameState: GameState
+                                ,topMargin: topMargin
+                                ,state: state
+                                ,graphStyle: graphStyle
+                                ,plotStyle: plotStyle
+                                ,graphs: graphs
+                                ,header: header
+                                ,doneButton: doneButton
+                                ,resetButton: resetButton
+                                ,nextButton: nextButton
+                                ,startOver: startOver
+                                ,scoreDisplay: scoreDisplay
+                                ,scoreLine: scoreLine
+                                ,resultScore: resultScore
+                                ,upstateDrawing: upstateDrawing
+                                ,upStatePhase: upStatePhase
+                                ,upState: upState
+                                ,main: main
+                                ,mousePosInSignalFrame: mousePosInSignalFrame
+                                ,convertCoords: convertCoords
+                                ,lerp: lerp
+                                ,isMouseInDrawSpace: isMouseInDrawSpace
+                                ,mouseCoordData: mouseCoordData
+                                ,filterNothing: filterNothing
+                                ,maybeMouse: maybeMouse
+                                ,myMailbox: myMailbox
+                                ,box: box
+                                ,sinc: sinc
+                                ,sinc2: sinc2
+                                ,triangle: triangle
+                                ,gaussian: gaussian
+                                ,gaussianTransform: gaussianTransform
+                                ,cosTransform: cosTransform
+                                ,impulse: impulse
+                                ,impulseTrain: impulseTrain
+                                ,$const: $const
+                                ,boxPair: boxPair
+                                ,trianglePair: trianglePair
+                                ,gaussianPair: gaussianPair
+                                ,impulsePair: impulsePair
+                                ,cosPair: cosPair
+                                ,check: check
+                                ,rms: rms
+                                ,crossCorr: crossCorr
+                                ,unJustFloat: unJustFloat
+                                ,percentToColor: percentToColor
+                                ,percentToMessage: percentToMessage};
+};

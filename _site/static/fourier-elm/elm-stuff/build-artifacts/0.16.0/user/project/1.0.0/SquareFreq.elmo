@@ -1,0 +1,36 @@
+Elm.SquareFreq = Elm.SquareFreq || {};
+Elm.SquareFreq.make = function (_elm) {
+   "use strict";
+   _elm.SquareFreq = _elm.SquareFreq || {};
+   if (_elm.SquareFreq.values) return _elm.SquareFreq.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Graphing = Elm.Graphing.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var graphStyle = _U.update($Graphing.defaultGraph,
+   {width: 800
+   ,height: 300
+   ,yInterval: {ctor: "_Tuple2",_0: 0,_1: 1.5}
+   ,xInterval: {ctor: "_Tuple2",_0: 0,_1: 40}
+   ,margin: 25
+   ,axisColor: "#000"
+   ,axisWidth: 2
+   ,xTicksEvery: 5
+   ,yTicksEvery: 1});
+   var dataList = A2($List.map,
+   function (x) {
+      return {ctor: "_Tuple2",_0: x,_1: $Basics.abs(4 / $Basics.pi / x)};
+   },
+   A2($List.map,function (x) {    return 2 * x - 1;},_U.range(1,20)));
+   var data = $Graphing.wrapData(dataList);
+   var main = A2($Graphing.graph,
+   _U.list([{ctor: "_Tuple2",_0: data,_1: _U.update($Graphing.defaultPlot,{strokeColor: "#ee2560",dotColor: "#ee2560"})}]),
+   graphStyle);
+   return _elm.SquareFreq.values = {_op: _op,data: data,dataList: dataList,graphStyle: graphStyle,main: main};
+};

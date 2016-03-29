@@ -5,9 +5,60 @@
     <description></description>
     <link>http://catmores.co/</link>
     <atom:link href="http://catmores.co/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 07 Feb 2016 23:02:10 -0600</pubDate>
-    <lastBuildDate>Sun, 07 Feb 2016 23:02:10 -0600</lastBuildDate>
+    <pubDate>Mon, 28 Mar 2016 19:46:14 -0500</pubDate>
+    <lastBuildDate>Mon, 28 Mar 2016 19:46:14 -0500</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>Ten Weeks With Elm</title>
+        <description>&lt;p&gt;This past quarter, I had the opportunity to take a class entitled “Functional Programming”, which I thought would be in Haskell, but ended up being in Elm–you know, that trendy new functional language that was built as a thesis project in 2012 and compiles to HTML, CSS, and JavaScript.&lt;/p&gt;
+
+&lt;p&gt;At the end of the class, I ended up with &lt;a href=&quot;http://catmores.co/static/Pi.html&quot;&gt;this Monte Carlo pi approximator&lt;/a&gt;, &lt;a href=&quot;http://catmores.co/static/fourier-elm/Fourier.html&quot;&gt;this interactive introduction to Fourier transforms&lt;/a&gt;, and &lt;a href=&quot;http://catmores.co/static/fourier-elm/FFTDemo.html&quot;&gt;this Fourier transform game&lt;/a&gt; that I don’t recommend trying unless you have a very good knowledge of common FTs and a very steady hand. The latter two of these are built on a &lt;em&gt;very&lt;/em&gt; barebones graphing library that I had to write myself (that I hope to polish up a bit soon and put on GitHub).&lt;/p&gt;
+
+&lt;p&gt;I also left the class with some opinions on Elm, which I figured I’d write down somewhere. &lt;/p&gt;
+
+&lt;h2 id=&quot;the-good&quot;&gt;The Good&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Elm forces you to be organized when you write code&lt;/em&gt;. This, for me, was probably the biggest positive aspect of developing with Elm; writing in a functional language and letting the compiler take care of the JavaScript means that you’re writing code with minimal side effects, working with strict types and immutable values. The state is all kept in one place and is built directly from well-defined inputs and mutation of a fixed initial state. As a result, runtime errors are far, far more infrequent in Elm that JavaScript.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Functional programming is fun&lt;/em&gt;. Seriously, slapping together some maps and foldrs to solve a problem is like a puzzle; it’s a totally different way of thinking than imperative programming, and can be refreshing.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Some parts of Elm are especially elegant, like creating layouts&lt;/em&gt;. The way Elm handles HTML and CSS is nicer than I expected; someone once mentionted an Elm demo to me where someone vertically centered a div with a single line of Elm, to thunderous applause. (Whether this is a poor reflection on the current state of CSS/HTML, rather than a triumph of Elm, is a valid question.)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;the-parts-i-wasnt-impressed-with&quot;&gt;The Parts I Wasn’t Impressed With&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;It can, at times, feel like overkill&lt;/em&gt;. I ended up writing most of the Fourier introduction above in HTML/CSS, and just embedding the Elm widgets; since the basic layout is so straightforward and done easily in HTML and CSS, creating it functionally in Elm (especially with the somewhat clumsy styling in pure Elm) seemed like a pointless and arduous exercise (the game, though, is almost entirely pure Elm).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;It doesn’t have typeclasses&lt;/em&gt;. Pardon my momentary, wistful gaze at Haskell.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;Pure Elm can be very slow, and not-pure Elm feels to me like cheating&lt;/em&gt;. In Elm, state is built up from an initial state over time–conceptually, current state is computed by re-executing all past computations, although the compiler obviously optimizes this. However, Elm can still be much slower than standard hand-written HTML/CSS/JS, especially where graphics involving a lot of elements are involved. Libraries like the elm-html library attempt to solve this problem, but at some points I did find myself wondering where the marginal benefit to using Elm was as I found myself building each individual HTML element, setting attributes, etc. exactly as I would with normal HTML/CSS.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;overall&quot;&gt;Overall&lt;/h2&gt;
+
+&lt;p&gt;On the whole, Elm was fun and different, if not particularly challenging (if you already have some functional programming experience). Would I recommend you try to build a heavy-duty web application with it? No, probably not. At least, not yet. If you enjoy functional programming, you should definitely play around with it, though; there’s something really compelling and elegant about functional reactive programming, even if I’m not yet entirely convinced I’d want to use it to build any larger, more complex applications.&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 28 Mar 2016 00:00:00 -0500</pubDate>
+        <link>http://catmores.co/technical/2016/03/28/ten-weeks-with-elm.html</link>
+        <guid isPermaLink="true">http://catmores.co/technical/2016/03/28/ten-weeks-with-elm.html</guid>
+        
+        <category>elm</category>
+        
+        
+        <category>technical</category>
+        
+      </item>
     
       <item>
         <title>The Past 365 Days</title>
