@@ -9,7 +9,7 @@ tags: life being-an-adult
 
 I haven't added anything to this blog in 365 days. I'm not going to apologize (what do I owe *you*, anyway?), but I am going to seize this near end-of-year opportunity to reflect on this past year in a desperate attempt to make sense of my soon-to-be-adult life.
 
-#2015: The good parts
+## 2015: The good parts
 
 This year, I...
 
@@ -32,7 +32,7 @@ This year, I...
 - Started a [style blog](http://rigorousinquiry.com/) with some friends (it's [open source](https://github.com/rigorousinquiry/rigorousinquiry.github.io), feel free to contribute!)
 
 
-#Self-indulgent reflections on senior year
+## Self-indulgent reflections on senior year
 
 This is a weird time in my life, because it's so transitional--I've been living in the same building and walking the same route to classes now for *four years*, and now every time I do ordinary things, all I can think is, "well, this is my last Physics midterm" or "well, this is the last time I'll watch the ivy in the courtyard of my building change color" or "well, this is the last time I make a round-trip flight back to New Jersey". 
 
