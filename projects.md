@@ -27,6 +27,16 @@ A research project to explore the use of acoustic multilateration to pinpoint th
 
 <br>
 
+<div id="whack"></div>
+
+# whack
+<img src="/img/whack.png" style="width: 400px;margin-left:auto;margin-right:auto;display:block"/>
+
+A slicer and G-code generator for RepRap firmwares, in Haskell.
+<a href="https://github.com/nhalford/slicer">Available on Github</a>.
+
+<br>
+
 <div id="scannd"></div>
 
 # Scannd: The PDF Project
