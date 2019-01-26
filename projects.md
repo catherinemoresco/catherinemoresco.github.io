@@ -21,7 +21,7 @@ We also built an API, and were featured API sponsors of the Fall 2014 HackNY Hac
 <div id="haunt"></div>
 
 # H.A.U.N.T. (Hyperboloid Acoustic Uncovering of Noisy Targets)
-<img src="/img/haunt.png" style="width: 400px;margin-left:auto;margin-right:auto;display:block"/>
+<img src="/img/haunt.jpg" style="width: 400px;margin-left:auto;margin-right:auto;display:block"/>
 
 A research project to explore the use of acoustic multilateration to pinpoint the location of a noise source in space, using a set of readily available acoustic sensors--iPhones. <a href="https://docs.google.com/document/d/1fT6lRtWwRw_d61L8Mf-ZOQn21SG22Hhw3-Br8QzY0Yc/edit?usp=sharing">Design Doc,</a> <a href="https://docs.google.com/presentation/d/1FZ5YcVhvqnIH1dLDFh7TJK_JnymzUvS5UuRBSeEC2Dw/edit?usp=sharing">Slides<a>
 
@@ -30,7 +30,7 @@ A research project to explore the use of acoustic multilateration to pinpoint th
 <div id="whack"></div>
 
 # whack
-<img src="/img/whack.png" style="width: 400px;margin-left:auto;margin-right:auto;display:block"/>
+<img src="/img/whack.jpg" style="width: 400px;margin-left:auto;margin-right:auto;display:block"/>
 
 A slicer and G-code generator for RepRap firmwares, in Haskell.
 <a href="https://github.com/nhalford/slicer">Available on Github</a>.
